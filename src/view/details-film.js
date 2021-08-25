@@ -1,14 +1,14 @@
-import { getFormatDate, getListFromArr, getDurationTime } from '../util/utils.js';
+import { getFormatDate, getDurationTime } from '../util/utils.js';
 
-export const filmPopupTemplate = (film) => {
+export const createFilmDetailsTemplate = (film) => {
   const { title, poster, description, date, rating, details, genres } = film;
 
   const genresTitle = genres.length > 1 ? 'Genres' : 'Genre';
 
-  const getGenresList = (filmGenres) => filmGenres.map(
-    (genre) =>
-      `<span class="film-details__genre">${genre}</span>`,
-  ).join('');
+  // const getGenresList = (filmGenres) => filmGenres.map(
+  //   (genre) =>
+  //     `<span class="film-details__genre">${genre}</span>`,
+  // ).join('');
 
   return `
   <section class="film-details">
@@ -39,11 +39,11 @@ export const filmPopupTemplate = (film) => {
             </tr>
             <tr class="film-details__row">
               <td class="film-details__term">Writers</td>
-              <td class="film-details__cell">${getListFromArr(details.writers)}</td>
+              <td class="film-details__cell">${details.writers}</td>
             </tr>
             <tr class="film-details__row">
               <td class="film-details__term">Actors</td>
-              <td class="film-details__cell">${getListFromArr(details.actors)}</td>
+              <td class="film-details__cell">${details.actors}</td>
             </tr>
             <tr class="film-details__row">
               <td class="film-details__term">Release Date</td>
@@ -59,7 +59,7 @@ export const filmPopupTemplate = (film) => {
             </tr>
             <tr class="film-details__row">
               <td class="film-details__term">${genresTitle}</td>
-              <td class="film-details__cell">${getGenresList(genres)}</tr>
+              <td class="film-details__cell">${genres}</tr>
           </table>
           <p class="film-details__film-description">${description}</p>
         </div>

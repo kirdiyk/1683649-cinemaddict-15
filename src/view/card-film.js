@@ -3,7 +3,7 @@ import { getDurationTime, getFormatDate, sliceDescription } from '../util/utils.
 export const createCardFilmTemplate = (film) => {
   const { title, poster, description, date, genres, rating, comments, userInfo } = film;
 
-  const setRatingClass = () => {
+  const getRatingClass = () => {
     if (rating < 4) {
       return 'film-card__rating--poor';
     } else if (rating > 4 && rating < 6) {
@@ -13,20 +13,20 @@ export const createCardFilmTemplate = (film) => {
   };
 
   const watchlistClass = userInfo.inWatchlist
-    ? 'film-card__controls-item--add-to-watchlist film-card__controls-item--active'
-    : 'film-card__controls-item--add-to-watchlist';
+    ? 'film-card__controls-item--active'
+    : '';
 
   const favoriteClass = userInfo.isFavorite
-    ? 'film-card__controls-item--favorite  film-card__controls-item--active'
-    : 'film-card__controls-item--favorite';
+    ? 'film-card__controls-item--active'
+    : '';
 
   const viewedClass = userInfo.isViewed
-    ? 'film-card__controls-item--mark-as-watched film-card__controls-item--active'
-    : 'film-card__controls-item--mark-as-watched';
+    ? 'film-card__controls-item--active'
+    : '';
   return `
   <article class="film-card">
     <h3 class="film-card__title">${title}</h3>
-    <p class="film-card__rating ${setRatingClass()}">${rating}</p>
+    <p class="film-card__rating ${getRatingClass()}">${rating}</p>
     <p class="film-card__info">
       <span class="film-card__year">${getFormatDate(date.releaseDate, 'YYYY')}</span>
       <span class="film-card__duration">${getDurationTime(date.runtime, 'minute')}</span>
@@ -36,9 +36,9 @@ export const createCardFilmTemplate = (film) => {
     <p class="film-card__description">${sliceDescription(description)}</p>
     <a class="film-card__comments">${comments.length} comments</a>
     <div class="film-card__controls">
-      <button class="film-card__controls-item ${watchlistClass}" type="button">Add to watchlist </button>
-      <button class="film-card__controls-item ${viewedClass}" type="button">Mark as watched</button>
-      <button class="film-card__controls-item ${favoriteClass}" type="button">Mark as favorite</button>
+      <button class="film-card__controls-item film-card__controls-item--add-to-watchlist ${watchlistClass}" type="button">Add to watchlist </button>
+      <button class="film-card__controls-item film-card__controls-item--mark-as-watched ${viewedClass}" type="button">Mark as watched</button>
+      <button class="film-card__controls-item film-card__controls-item--favorite  ${favoriteClass}" type="button">Mark as favorite</button>
     </div>
   </article>
 `;

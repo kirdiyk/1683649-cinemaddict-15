@@ -21,7 +21,7 @@ const generateTitle = () => {
   return titles[getRandomArrayElement(0, titles.length - 1)];
 };
 
-const generatePosters = () => {
+const generatePoster = () => {
   const posters = [
     'images/posters/made-for-each-other.png',
     'images/posters/popeye-meets-sinbad.png',
@@ -48,7 +48,7 @@ const generateCountry = () => {
   return country[getRandomArrayElement(0, country.length - 1)];
 };
 
-const generateActors = () => {
+const generateActor = () => {
   const actors = [
     'Glenn Close',
     'Al Pacino',
@@ -60,7 +60,7 @@ const generateActors = () => {
   return getRandomArrayElement(actors, actors.length);
 };
 
-const generateGenres = () =>{
+const generateGenre = () =>{
   const genres = [
     'Action',
     'Animation',
@@ -91,7 +91,7 @@ const generateDescription = () => {
   return getRandomArrayInRange(descriptions, 5).join('. ');
 };
 
-const generateDirectors = () => {
+const generateDirector = () => {
   const directors = [
     'Anne Wigton',
     'Heinz Herald',
@@ -109,7 +109,7 @@ const generateData = () => {
   return [year, month, day].join('-');
 };
 
-const generateCounters = () => ({
+const generateCounter = () => ({
   isViewed: Boolean(getRandomArrayElement(0, 1)),
   isFavorite: Boolean(getRandomArrayElement(0, 1)),
   inWatchlist: Boolean(getRandomArrayElement(0, 1)),
@@ -163,7 +163,7 @@ export const generateCommentsData = () => {
   };
 
 
-  const generateComments = () => {
+  const generateComment = () => {
     const comments = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
       'Cras aliquet varius magna, non porta ligula feugiat eget',
@@ -204,13 +204,13 @@ export const generateCommentsData = () => {
   return {
     id: generateCommentId(),
     author: generateAuthor(),
-    text: generateComments(),
+    text: generateComment(),
     emoji: generateEmoji(),
     date: generateCommentDate(),
   };
 };
 
-const createComments = () => {
+const createComment = () => {
   const comments = [];
 
   for (let i = 1; i < 7; i++) {
@@ -222,10 +222,10 @@ const createComments = () => {
 
 export const generateFilmData = () => ({
   title: generateTitle(),
-  poster: generatePosters(),
+  poster: generatePoster(),
   description: generateDescription(),
   rating: getRandomIntegerInRangeWithFloat(0, 10),
-  genres: generateGenres(),
+  genres: generateGenre(),
   date: {
     releaseDate: generateData(),
     runtime: getRandomArrayElement(40, 350),
@@ -233,15 +233,15 @@ export const generateFilmData = () => ({
   details: {
     age: generateAge(),
     originalTitle: generateTitle(),
-    director: generateDirectors(),
+    director: generateDirector(),
     writers: 'Rikten',
-    actors: generateActors(),
+    actors: generateActor(),
     country: generateCountry(),
   },
   watchlist: Boolean(getRandomInteger(0, 1)),
   //history: Boolean(getRandomInteger(0, 1)),
   favorite: Boolean(getRandomInteger(0, 1)),
-  comments: createComments(),
-  userInfo: generateCounters(),
+  comments: createComment(),
+  userInfo: generateCounter(),
 });
 

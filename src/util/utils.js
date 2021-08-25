@@ -60,3 +60,7 @@ export const getRandomDate = (daySpread = -7, monthSpread = -12, yearSpread = -1
 
   return dayjs().add(dayGap, 'day').add(monthGap, 'month').add(yearGap, 'year').toString();
 };
+
+export const getListFromArr = (arr) => arr.join();
+
+
