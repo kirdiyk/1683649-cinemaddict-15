@@ -63,4 +63,13 @@ export const getRandomDate = (daySpread = -7, monthSpread = -12, yearSpread = -1
 
 export const getListFromArr = (arr) => arr.join();
 
+export const createElement = (template) => {
+  const newElement = document.createElement('div');
+  newElement.innerHTML = template;
+
+  return newElement.firstChild;
+};
+
+export const removeDOMElement = (className) => document.querySelector(className).remove();
+
 

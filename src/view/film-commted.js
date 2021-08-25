@@ -1,4 +1,4 @@
-import { getFormatDate } from '../util/utils.js';
+import { getFormatDate, createElement } from '../util/utils.js';
 
 const createCommentItemTemplate = (commentsData = {}) => {
   const { author, date, emoji, text } = commentsData;
@@ -22,7 +22,7 @@ const createCommentItemTemplate = (commentsData = {}) => {
   );
 };
 
-export const filmCommentTemplate = (film, commentsItems) => {
+const filmCommentTemplate = (film, commentsItems) => {
   const { comments } = film;
 
   const commentItemsTemplate = commentsItems
@@ -38,3 +38,27 @@ export const filmCommentTemplate = (film, commentsItems) => {
     </div>`
   );
 };
+
+export default class listCommentsClass {
+  constructor(film, comments) {
+    this._film = film;
+    this._comments = comments;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return filmCommentTemplate(this._film, this._comments);
+  }
+
+  renderElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

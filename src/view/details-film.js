@@ -1,17 +1,12 @@
-import { getFormatDate, getDurationTime } from '../util/utils.js';
+import { getFormatDate, getDurationTime, createElement } from '../util/utils.js';
 
-export const createFilmDetailsTemplate = (film) => {
+const createFilmDetailsTemplate = (film) => {
   const { title, poster, description, date, rating, details, genres } = film;
 
   const genresTitle = genres.length > 1 ? 'Genres' : 'Genre';
 
-  // const getGenresList = (filmGenres) => filmGenres.map(
-  //   (genre) =>
-  //     `<span class="film-details__genre">${genre}</span>`,
-  // ).join('');
-
-  return `
-  <section class="film-details">
+  return (
+    `<section class="film-details">
   <form class="film-details__inner" action="" method="get">
     <div class="film-details__top-container">
       <div class="film-details__close">
@@ -67,5 +62,33 @@ export const createFilmDetailsTemplate = (film) => {
     </div>
   </form>
 </section>
-  `;
+  `);
 };
+
+export default class FilmDetailClass {
+  constructor() {
+    this._element = null;
+  }
+
+  getTemplate(film) {
+    document.querySelector('body').classList.add('hide-overflow');
+
+    return createFilmDetailsTemplate(film);
+  }
+
+  renderElement(film) {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate(film));
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    if (this._element) {
+      this._element.parentNode.removeChild(this._element);
+    }
+
+    this._element = null;
+  }
+}

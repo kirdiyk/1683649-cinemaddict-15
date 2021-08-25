@@ -1,6 +1,6 @@
 import { generateCommentsData, generateFilmData} from './mock/film-card-mock.js';
-import { filmCommentTemplate } from './view/film-commted.js';
-import { createSiteMenuTemplate } from './view/site-menu.js';
+import listCommentsClass from './view/film-commted.js';
+import mainMenuClass from './view/site-menu.js';
 import { createCardFilmTemplate } from './view/card-film.js';
 import { filmControlsTemplate } from './view/film-controls.js';
 import { createFilmDetailsTemplate } from './view/details-film.js';
@@ -11,12 +11,9 @@ import { profileTemplate } from './view/prodile-user.js';
 import { createFilmListTemplate } from './view/list-film.js';
 import { FILM_CARD, ALL_FILMS, TOP_RATED } from './util/const.js';
 import { createCommentTemplate } from './view/add-film-comment.js';
-//import { generateComment } from './mock/comment.js';
 import { getRandomInteger } from './util/utils.js';
 
-const getFilmsMock = Array.from({length:ALL_FILMS}, () => generateFilmData()); //.fill().map();//() => generateFilmData());
-
-const films = getFilmsMock;
+const films = Array.from({length:ALL_FILMS}, () => generateFilmData());
 
 const getFilterData = (filmList) => {
   const watchList = [];
@@ -46,7 +43,7 @@ const getFilterData = (filmList) => {
 
 const filterData = getFilterData(films);
 
-const comments = Array.from({length: getRandomInteger(3, 20)}, () => generateCommentsData());//.fill('').map(generateComment);
+const comments = Array.from({length: getRandomInteger(3, 20)}, () => generateCommentsData());
 
 
 const siteMainElement = document.querySelector('.main');
@@ -57,12 +54,6 @@ const siteFooterElement = document.querySelector('.footer');
 const render = (template, container, place = 'beforeend') => {
   container.insertAdjacentHTML(place, template);
 };
-
-// const renderFilmCards = (cardsCount, container) => {
-//   for (let i = 0; i < cardsCount; i++) {
-//     render(createCardFilmTemplate (), container);
-//   }
-// };
 
 render(createSiteMenuTemplate(filterData), siteMainElement);
 render(profileTemplate(), siteHeaderElement);
@@ -75,12 +66,10 @@ render(filmListCommentedTemplate, siteFilmsContainer);
 
 const siteFilmListContainer = siteMainElement.querySelector('.films-list__container');
 
-const j = Math.min(films.length, FILM_CARD);
-for (let i = 0; i < j; i++) {
+const filmsCount = Math.min(films.length, FILM_CARD);
+for (let i = 0; i < filmsCount; i++) {
   render(createCardFilmTemplate(films[i]), siteFilmListContainer);
 }
-
-//renderFilmCards(FILM_CARD, siteFilmListContainer);
 
 const siteFilmListElement = siteMainElement.querySelector('.films-list');
 if (films.length > FILM_CARD) {

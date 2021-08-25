@@ -1,6 +1,6 @@
-import { getDurationTime, getFormatDate, sliceDescription } from '../util/utils.js';
+import { createElement,getDurationTime, getFormatDate, sliceDescription } from '../util/utils.js';
 
-export const createCardFilmTemplate = (film) => {
+const createCardFilmTemplate = (film) => {
   const { title, poster, description, date, genres, rating, comments, userInfo } = film;
 
   const getRatingClass = () => {
@@ -23,7 +23,8 @@ export const createCardFilmTemplate = (film) => {
   const viewedClass = userInfo.isViewed
     ? 'film-card__controls-item--active'
     : '';
-  return `
+  return (
+    `
   <article class="film-card">
     <h3 class="film-card__title">${title}</h3>
     <p class="film-card__rating ${getRatingClass()}">${rating}</p>
@@ -40,6 +41,29 @@ export const createCardFilmTemplate = (film) => {
       <button class="film-card__controls-item film-card__controls-item--mark-as-watched ${viewedClass}" type="button">Mark as watched</button>
       <button class="film-card__controls-item film-card__controls-item--favorite  ${favoriteClass}" type="button">Mark as favorite</button>
     </div>
-  </article>
-`;
+  </article>`
+  );
 };
+
+export default class FilmCard {
+  constructor(film) {
+    this._film = film;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createCardFilmTemplate(this._film);
+  }
+
+  renderElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

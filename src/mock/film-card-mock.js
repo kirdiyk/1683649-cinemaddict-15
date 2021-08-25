@@ -239,7 +239,6 @@ export const generateFilmData = () => ({
     country: generateCountry(),
   },
   watchlist: Boolean(getRandomInteger(0, 1)),
-  //history: Boolean(getRandomInteger(0, 1)),
   favorite: Boolean(getRandomInteger(0, 1)),
   comments: createComment(),
   userInfo: generateCounter(),
