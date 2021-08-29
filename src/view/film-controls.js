@@ -1,4 +1,4 @@
-import { createElement } from '../util/utils';
+import { createElement } from '../util/utils.js';
 
 const filmControlsTemplate = (film) => {
   const { userInfo } = film;

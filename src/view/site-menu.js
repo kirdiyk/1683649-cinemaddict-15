@@ -1,4 +1,4 @@
-import { createElement } from '../util/utils';
+import { createElement } from '../util/utils.js';
 
 const createSiteMenuTemplate =  (filterData) => (
   `<nav class="main-navigation">

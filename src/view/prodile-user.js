@@ -1,4 +1,4 @@
-import { createElement } from '../utils/utils.js';
+import { createElement } from '../util/utils.js';
 
 export const profileTemplate = () => (
   `
