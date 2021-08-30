@@ -1,4 +1,4 @@
-import { createElement } from '../util/utils';
+import AbstractClass from './abctract.js';
 
 const createMenuItemTemplate = (filters) => {
   const { name, count } = filters;
@@ -11,7 +11,6 @@ const createMenuItemTemplate = (filters) => {
   return (
     `<a href="#${name}" class="main-navigation__item">
       ${name}
-      <!-- Не показывать счетчик фильмов у пункта "All movies" когда фильмов 0 -->
       ${name === 'All movies' ? '' : checkFilmCount(count)}
     </a>`
   );
@@ -30,25 +29,13 @@ const createMenuTemplate = (menuItems) => {
   );
 };
 
-export default class Menu {
+export default class Menu extends AbstractClass {
   constructor(filters) {
+    super();
     this._filters = filters;
-    this._element = null;
   }
 
   getTemplate() {
     return createMenuTemplate(this._filters);
-  }
-
-  renderElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

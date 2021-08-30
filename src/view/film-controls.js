@@ -1,4 +1,4 @@
-import { createElement } from '../util/utils.js';
+import AbstractClass from './abctract.js';
 
 const filmControlsTemplate = (film) => {
   const { userInfo } = film;
@@ -16,35 +16,21 @@ const filmControlsTemplate = (film) => {
     : '';
 
   return (
-    `
-  <section class="film-details__controls">
+    `<section class="film-details__controls">
     <button type="button" class="film-details__control-button film-details__control-button--watchlist  ${watchlistClass}" id="watchlist" name="watchlist">Add to watchlist</button>
     <button type="button" class="film-details__control-button film-details__control-button--watched  ${viewedClass}" id="watched" name="watched">Already watched</button>
     <button type="button" class="film-details__control-button film-details__control-button--favorite ${favoriteClass}" id="favorite" name="favorite">Add to favorites</button>
-    </section>
-  `
+    </section>`
   );
 };
 
-export default class FilmControls {
+export default class FilmControls extends AbstractClass {
   constructor(film) {
+    super();
     this._film = film;
-    this._element = null;
   }
 
   getTemplate() {
     return filmControlsTemplate(this._film);
-  }
-
-  renderElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

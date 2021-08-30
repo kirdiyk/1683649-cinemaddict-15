@@ -1,4 +1,6 @@
-import { getFormatDate, getDurationTime, createElement } from '../util/utils.js';
+import { getFormatDate, getDurationTime} from '../util/utils.js';
+import { createElement } from '../util/render.js';
+import AbstractClass from './abctract.js';
 
 const createFilmDetailsTemplate = (film) => {
   const { title, poster, description, date, rating, details, genres } = film;
@@ -61,24 +63,25 @@ const createFilmDetailsTemplate = (film) => {
       </div>
     </div>
   </form>
-</section>
-  `);
+</section>`
+  );
 };
 
-export default class FilmDetailClass {
+export default class FilmDetailClass  extends AbstractClass{
   constructor() {
-    this._element = null;
+    super();
+
+    this._closePopupClickHandler = this._closePopupClickHandler.bind(this);
   }
 
   getTemplate(film) {
-    document.querySelector('body').classList.add('hide-overflow');
-
     return createFilmDetailsTemplate(film);
   }
 
   renderElement(film) {
     if (!this._element) {
-      this._element = createElement(this.getTemplate(film));
+      this._film = film;
+      this._element = createElement(this.getTemplate(this._film));
     }
 
     return this._element;
@@ -89,6 +92,22 @@ export default class FilmDetailClass {
       this._element.parentNode.removeChild(this._element);
     }
 
-    this._element = null;
+    this._film = null;
+    super.removeElement();
+  }
+
+  _closePopupClickHandler(evt) {
+    evt.preventDefault();
+
+    this.removeElement();
+    this._callback.click();
+  }
+
+  setClosePopupClickHandler(callback) {
+    const closeButton = this.renderElement().querySelector('.film-details__close-btn');
+    closeButton.addEventListener('click', this._closePopupClickHandler);
+
+    this._callback.click = callback;
   }
 }
+

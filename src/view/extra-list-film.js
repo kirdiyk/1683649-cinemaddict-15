@@ -1,13 +1,11 @@
 import { createElement } from '../util/utils.js';
 
 const createFilmListExtraTemplate = () => (
-  `
-  <section class="films-list films-list--extra">
+  `<section class="films-list films-list--extra">
     <h2 class="films-list__title">Top rated</h2>
     <div class="films-list__container">
     </div>
-  </section>
-  `
+  </section>`
 );
 
 export default class FilmListExtra {

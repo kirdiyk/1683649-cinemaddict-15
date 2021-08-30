@@ -1,4 +1,5 @@
-import { getFormatDate, createElement } from '../util/utils.js';
+import { getFormatDate } from '../util/utils.js';
+import AbstractClass from './abctract.js';
 
 const createCommentItemTemplate = (commentsData = {}) => {
   const { author, date, emoji, text } = commentsData;
@@ -30,7 +31,7 @@ const filmCommentTemplate = (film, commentsItems) => {
     .map((item) => createCommentItemTemplate(item));
 
   return (
-    ` <div class="film-details__bottom-container">
+    `<div class="film-details__bottom-container">
       <section class="film-details__comments-wrap">
         <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${commentItemsTemplate.length}</span></h3>
         <ul class="film-details__comments-list">${commentItemsTemplate.join('')}</ul>
@@ -39,26 +40,14 @@ const filmCommentTemplate = (film, commentsItems) => {
   );
 };
 
-export default class listCommentsClass {
+export default class listCommentsClass extends AbstractClass {
   constructor(film, comments) {
+    super();
     this._film = film;
     this._comments = comments;
-    this._element = null;
   }
 
   getTemplate() {
     return filmCommentTemplate(this._film, this._comments);
-  }
-
-  renderElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

@@ -1,4 +1,5 @@
-import { createElement,getDurationTime, getFormatDate, sliceDescription } from '../util/utils.js';
+import { getDurationTime, getFormatDate, sliceDescription } from '../util/utils.js';
+import AbstractClass from './abctract.js';
 
 const createCardFilmTemplate = (film) => {
   const { title, poster, description, date, genres, rating, comments, userInfo } = film;
@@ -24,8 +25,7 @@ const createCardFilmTemplate = (film) => {
     ? 'film-card__controls-item--active'
     : '';
   return (
-    `
-  <article class="film-card">
+    `<article class="film-card">
     <h3 class="film-card__title">${title}</h3>
     <p class="film-card__rating ${getRatingClass()}">${rating}</p>
     <p class="film-card__info">
@@ -45,25 +45,28 @@ const createCardFilmTemplate = (film) => {
   );
 };
 
-export default class FilmCard {
+export default class FilmCard extends AbstractClass {
   constructor(film) {
+    super();
     this._film = film;
-    this._element = null;
+    this._filmCardClickHandler = this._filmCardClickHandler.bind(this);
   }
 
   getTemplate() {
     return createCardFilmTemplate(this._film);
   }
 
-  renderElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
+  _filmCardClickHandler(evt) {
+    const target = evt.target;
+    if (target.matches('.film-card__poster')
+      || target.matches('.film-card__title')
+      || target.matches('.film-card__comments')) {
+      this._callback.click();
     }
-
-    return this._element;
   }
 
-  removeElement() {
-    this._element = null;
+  setFilmCardClickHandler(callback) {
+    this._callback.click = callback;
+    this.renderElement().addEventListener('click', this._filmCardClickHandler);
   }
 }

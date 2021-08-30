@@ -1,8 +1,7 @@
-import { createElement } from '../util/utils.js';
+import AbstractClass from './abctract.js';
 
 const createCommentTemplate = () => (
-  `
-    <div class="film-details__new-comment">
+  `<div class="film-details__new-comment">
       <div class="film-details__add-emoji-label"></div>
       <label class="film-details__comment-label">
         <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment"></textarea>
@@ -25,28 +24,12 @@ const createCommentTemplate = () => (
           <img src="./images/emoji/angry.png" width="30" height="30" alt="emoji">
         </label>
       </div>
-    </div>
-  `
+  </div>`
 );
 
-export default class NewComment {
-  constructor() {
-    this._element = null;
-  }
+export default class NewComment extends AbstractClass {
 
   getTemplate() {
     return createCommentTemplate();
-  }
-
-  renderElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

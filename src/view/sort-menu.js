@@ -1,4 +1,4 @@
-import { createElement } from '../util/utils.js';
+import AbstractClass from './abctract.js';
 
 const createSortFilmListTemplate = () => (
   `<ul class="sort">
@@ -8,28 +8,8 @@ const createSortFilmListTemplate = () => (
   </ul>`
 );
 
-export default class SortFilmList {
-  constructor() {
-    this._element = null;
-  }
-
+export default class SortFilmList extends AbstractClass {
   getTemplate() {
     return createSortFilmListTemplate();
-  }
-
-  renderElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    if (this._element) {
-      this._element.parentNode.removeChild(this._element);
-    }
-
-    this._element = null;
   }
 }
