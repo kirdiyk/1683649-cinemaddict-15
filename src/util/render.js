@@ -8,7 +8,7 @@ export const createElement = (template) => {
   return newElement.firstChild;
 };
 
-export const render = (child, container, place, arg = {}) => {
+export const render = (child, container, place = RenderPosition.BEFOREEND, arg = {}) => {
   if (container instanceof AbstractClass) {
     container = container.renderElement();
   }
