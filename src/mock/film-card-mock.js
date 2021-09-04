@@ -1,4 +1,5 @@
 import {getRandomArrayElement, getRandomIntegerInRangeWithFloat, getRandomArrayInRange, getRandomInteger} from '../util/utils.js';
+import { nanoid } from 'nanoid';
 
 const generateTitle = () => {
   const titles = [
@@ -109,12 +110,6 @@ const generateData = () => {
   return [year, month, day].join('-');
 };
 
-const generateCounter = () => ({
-  isViewed: Boolean(getRandomArrayElement(0, 1)),
-  isFavorite: Boolean(getRandomArrayElement(0, 1)),
-  inWatchlist: Boolean(getRandomArrayElement(0, 1)),
-});
-
 const generateAge = () => {
   const ageList = [13, 16, 18];
 
@@ -124,11 +119,11 @@ const generateAge = () => {
 const filmFilterMap = {
   'All movies': (films) => films.filter((film) => film),
   'Watchlist': (films) => films
-    .filter((film) => film.userInfo.inWatchlist).length,
+    .filter((film) => film.inWatchlist).length,
   'History': (films) => films
-    .filter((film) => film.userInfo.isViewed).length,
+    .filter((film) => film.isViewed).length,
   'Favorites': (films) => films
-    .filter((film) => film.userInfo.isFavorite).length,
+    .filter((film) => film.isFavorite).length,
 };
 
 export const generateFilmsFilter = (films) => Object.entries(filmFilterMap).map(
@@ -226,6 +221,7 @@ export const generateFilmData = () => ({
   description: generateDescription(),
   rating: getRandomIntegerInRangeWithFloat(0, 10),
   genres: generateGenre(),
+  id: nanoid(),
   date: {
     releaseDate: generateData(),
     runtime: getRandomArrayElement(40, 350),
@@ -238,9 +234,9 @@ export const generateFilmData = () => ({
     actors: generateActor(),
     country: generateCountry(),
   },
-  watchlist: Boolean(getRandomInteger(0, 1)),
-  favorite: Boolean(getRandomInteger(0, 1)),
   comments: createComment(),
-  userInfo: generateCounter(),
+  isViewed: Boolean(getRandomArrayElement(0, 1)),
+  isFavorite: Boolean(getRandomArrayElement(0, 1)),
+  inWatchlist: Boolean(getRandomArrayElement(0, 1)),
 });
 

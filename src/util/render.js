@@ -1,5 +1,5 @@
 import { RenderPosition } from './const.js';
-import AbstractClass from '../view/abctract.js';
+import Abstract from '../view/abctract.js';
 
 export const createElement = (template) => {
   const newElement = document.createElement('div');
@@ -8,13 +8,13 @@ export const createElement = (template) => {
   return newElement.firstChild;
 };
 
-export const render = (child, container, place = RenderPosition.BEFOREEND, arg = {}) => {
-  if (container instanceof AbstractClass) {
+export const render = (container, child, place) => {
+  if (container instanceof Abstract) {
     container = container.renderElement();
   }
 
-  if (child instanceof AbstractClass) {
-    child = child.renderElement(arg);
+  if (child instanceof Abstract) {
+    child = child.renderElement();
   }
 
   switch (place) {
@@ -31,10 +31,28 @@ export const render = (child, container, place = RenderPosition.BEFOREEND, arg =
 };
 
 export const removeComponent = (component) => {
-  if (!(component instanceof AbstractClass)) {
+  if (!(component instanceof Abstract)) {
     throw new Error('Can remove only components');
   }
 
   component.renderElement().remove();
   component.removeElement();
+};
+
+export const replace = (newChild, oldChild) => {
+  if (oldChild instanceof Abstract) {
+    oldChild = oldChild.renderElement();
+  }
+
+  if (newChild instanceof Abstract) {
+    newChild = newChild.renderElement();
+  }
+
+  const parent = oldChild.parentElement;
+
+  if (parent === null || oldChild === null || newChild === null) {
+    throw new Error('Can\'t replace unexisting elements');
+  }
+
+  parent.replaceChild(newChild, oldChild);
 };
