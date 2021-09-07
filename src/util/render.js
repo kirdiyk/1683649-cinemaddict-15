@@ -10,11 +10,11 @@ export const createElement = (template) => {
 
 export const render = (container, child, place) => {
   if (container instanceof Abstract) {
-    container = container.renderElement();
+    container = container.getElement();
   }
 
   if (child instanceof Abstract) {
-    child = child.renderElement();
+    child = child.getElement();
   }
 
   switch (place) {
@@ -35,17 +35,17 @@ export const removeComponent = (component) => {
     throw new Error('Can remove only components');
   }
 
-  component.renderElement().remove();
+  component.getElement().remove();
   component.removeElement();
 };
 
 export const replace = (newChild, oldChild) => {
   if (oldChild instanceof Abstract) {
-    oldChild = oldChild.renderElement();
+    oldChild = oldChild.getElement();
   }
 
   if (newChild instanceof Abstract) {
-    newChild = newChild.renderElement();
+    newChild = newChild.getElement();
   }
 
   const parent = oldChild.parentElement;

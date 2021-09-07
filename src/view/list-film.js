@@ -1,4 +1,4 @@
-import AbstractClass from './abctract.js';
+import Abstract from './abctract.js';
 
 export const createFilmListTemplate = () => (
   `<section class="films">
@@ -9,7 +9,7 @@ export const createFilmListTemplate = () => (
   </section>`
 );
 
-export default class FilmList extends AbstractClass {
+export default class FilmList extends Abstract {
   getTemplate() {
     return createFilmListTemplate();
   }

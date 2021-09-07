@@ -20,7 +20,7 @@ const createSiteMenuTemplate =  (filterData) => (
   </ul>`
 );
 
-export default class mainMenuClass {
+export default class mainMenu {
   constructor(filters) {
     this._filters = filters;
     this._element = null;

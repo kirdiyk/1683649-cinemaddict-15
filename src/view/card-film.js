@@ -1,10 +1,10 @@
 import { getDurationTime, getFormatDate, sliceDescription } from '../util/utils.js';
-import AbstractClass from './abctract.js';
+import Abstract from './abctract.js';
 
 const createCardFilmTemplate = (film) => {
   const { title, poster, description, date, genres, rating, comments, inWatchlist, isFavorite, isViewed } = film;
 
-  const getRatingClass = () => {
+  const getRating = () => {
     if (rating < 4) {
       return 'film-card__rating--poor';
     } else if (rating > 4 && rating < 6) {
@@ -26,16 +26,16 @@ const createCardFilmTemplate = (film) => {
     : '';
   return (
     `<article class="film-card">
-    <h3 class="film-card__title">${title}</h3>
-    <p class="film-card__rating ${getRatingClass()}">${rating}</p>
+    <h3 class="film-card__title" data-popup-open>${title}</h3>
+    <p class="film-card__rating ${getRating()}">${rating}</p>
     <p class="film-card__info">
       <span class="film-card__year">${getFormatDate(date.releaseDate, 'YYYY')}</span>
       <span class="film-card__duration">${getDurationTime(date.runtime, 'minute')}</span>
       <span class="film-card__genre">${genres[0]}</span>
     </p>
-    <img src=${poster} alt="${title}" class="film-card__poster">
+    <img src=${poster} alt="${title}" class="film-card__poster" data-popup-open>
     <p class="film-card__description">${sliceDescription(description)}</p>
-    <a class="film-card__comments">${comments.length} comments</a>
+    <a class="film-card__comments" data-popup-open>${comments.length} comments</a>
     <div class="film-card__controls">
       <button class="film-card__controls-item film-card__controls-item--add-to-watchlist ${watchlistClass}" type="button">Add to watchlist </button>
       <button class="film-card__controls-item film-card__controls-item--mark-as-watched ${viewedClass}" type="button">Mark as watched</button>
@@ -45,7 +45,7 @@ const createCardFilmTemplate = (film) => {
   );
 };
 
-export default class FilmCard extends AbstractClass {
+export default class FilmCard extends Abstract {
   constructor(film) {
     super();
     this._film = film;
@@ -60,17 +60,15 @@ export default class FilmCard extends AbstractClass {
   }
 
   _filmCardClickHandler(evt) {
-    const target = evt.target;
-    if (target.matches('.film-card__poster')
-      || target.matches('.film-card__title')
-      || target.matches('.film-card__comments')) {
+    const target = evt.target.dataset.popupOpen;
+    if (typeof target !== 'undefined') {
       this._callback.click();
     }
   }
 
   setFilmCardClickHandler(callback) {
     this._callback.click = callback;
-    this.renderElement().addEventListener('click', this._filmCardClickHandler);
+    this.getElement().addEventListener('click', this._filmCardClickHandler);
   }
 
   _viewedClickHadler(evt) {
@@ -90,21 +88,21 @@ export default class FilmCard extends AbstractClass {
 
   setViewedClickHadler(callback) {
     this._callback.viewedClick = callback;
-    this.renderElement()
+    this.getElement()
       .querySelector('.film-card__controls-item--mark-as-watched')
       .addEventListener('click', this._viewedClickHadler);
   }
 
   setFavoriteClickHadler(callback) {
     this._callback.favoriteClick = callback;
-    this.renderElement()
+    this.getElement()
       .querySelector('.film-card__controls-item--favorite')
       .addEventListener('click', this._favoriteClickHadler);
   }
 
   setWatchlistClickHadler(callback) {
     this._callback.watchlistClick = callback;
-    this.renderElement()
+    this.getElement()
       .querySelector('.film-card__controls-item--add-to-watchlist')
       .addEventListener('click', this._watchlistClickHadler);
   }

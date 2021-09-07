@@ -1,12 +1,12 @@
 import { createElement } from '../util/render.js';
 
-export default class AbstractClass {
+export default class Abstract {
   constructor() {
     this._element = null;
     this._callback = {};
   }
 
-  renderElement() {
+  getElement() {
     if (!this._element) {
       this._element = createElement(this.getTemplate());
     }

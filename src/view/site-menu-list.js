@@ -1,4 +1,4 @@
-import AbstractClass from './abctract.js';
+import Abstract from './abctract.js';
 
 const createMenuItemTemplate = (filters) => {
   const { name, count } = filters;
@@ -29,7 +29,7 @@ const createMenuTemplate = (menuItems) => {
   );
 };
 
-export default class Menu extends AbstractClass {
+export default class Menu extends Abstract {
   constructor(filters) {
     super();
     this._filters = filters;

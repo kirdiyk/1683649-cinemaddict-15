@@ -2,6 +2,11 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration.js';
 dayjs.extend(duration);
 import { MAX_DESCRIPTION } from './const';
+import relativeTime from 'dayjs/plugin/relativeTime.js';
+
+dayjs.extend(relativeTime);
+
+export const getRelativeTimeFromDate = (date) => dayjs(date).fromNow();
 
 export const getRandomFloat = (min, max, digits = 1) => {
   const lower = Math.min(Math.abs(min), Math.abs(max));

@@ -1,5 +1,5 @@
 import { getFormatDate } from '../util/utils.js';
-import AbstractClass from './abctract.js';
+import Abstract from './abctract.js';
 
 const createCommentItemTemplate = (commentsData = {}) => {
   const { author, date, emoji, text } = commentsData;
@@ -40,7 +40,7 @@ const filmCommentTemplate = (film, commentsItems) => {
   );
 };
 
-export default class listCommentsClass extends AbstractClass {
+export default class listCommentsClass extends Abstract {
   constructor(film, comments) {
     super();
     this._film = film;

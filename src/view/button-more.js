@@ -1,10 +1,10 @@
-import AbstractClass from './abctract.js';
+import Abstract from './abctract.js';
 
 const showMoreButtonTemplate = () => (
   '<button class="films-list__show-more">Show more</button>'
 );
 
-export default class ShowMoreButton extends AbstractClass {
+export default class ShowMoreButton extends Abstract {
   constructor() {
     super();
 
@@ -22,7 +22,7 @@ export default class ShowMoreButton extends AbstractClass {
   }
 
   setLoadMoreClickHandler(callback) {
-    this.renderElement().addEventListener('click', this._loadMoreClickHandler);
+    this.getElement().addEventListener('click', this._loadMoreClickHandler);
 
     this._callback.click = callback;
   }

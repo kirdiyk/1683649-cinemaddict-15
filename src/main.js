@@ -1,11 +1,11 @@
-import { generateCommentsData, generateFilmData} from './mock/film-card-mock.js';
+import { generateFilmData} from './mock/film-card-mock.js';
+import { generateCommentsData } from './mock/comment.js';
 import { generateFilmsFilter } from './mock/film-card-mock.js';
-import Films from './presentor/films-presentor.js';
+import Films from './presenter/films-presenter.js';
 import { ALL_FILMS } from './util/const.js';
-import { getRandomInteger } from './util/utils.js';
 
 const films = Array.from({length:ALL_FILMS}, () => generateFilmData());
-const comments = Array.from({length: getRandomInteger(3, 20)}, () => generateCommentsData());
+const comments = films.map((film) => generateCommentsData(film));
 const filters = generateFilmsFilter(films);
 
 const siteMainElement = document.querySelector('.main');

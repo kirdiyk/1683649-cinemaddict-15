@@ -9,3 +9,7 @@ export const RenderPosition = {
   AFTEREND: 'afterend',
   BEFOREEND: 'beforeend',
 };
+export const CardMode = {
+  OPEN: 'OPEN',
+  CLOSE: 'CLOSE',
+};

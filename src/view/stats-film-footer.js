@@ -1,4 +1,4 @@
-import AbstractClass from './abctract.js';
+import Abstract from './abctract.js';
 
 const createFooterStatsTemplate = (films = []) => (
   `<section class="footer__statistics">
@@ -6,7 +6,7 @@ const createFooterStatsTemplate = (films = []) => (
   </section>`
 );
 
-export default class FooterStats extends AbstractClass {
+export default class FooterStats extends Abstract {
   constructor(films) {
     super();
     this._films = films;

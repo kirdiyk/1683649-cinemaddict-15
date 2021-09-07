@@ -1,4 +1,4 @@
-import AbstractClass from './abctract.js';
+import Abstract from './abctract.js';
 import { SortType } from '../util/utils.js';
 
 const createSortFilmListTemplate = () => (
@@ -9,7 +9,7 @@ const createSortFilmListTemplate = () => (
   </ul>`
 );
 
-export default class SortFilmList extends AbstractClass {
+export default class SortFilmList extends Abstract {
   constructor() {
     super();
 
@@ -41,6 +41,6 @@ export default class SortFilmList extends AbstractClass {
 
   setSortTypeChangeHandler(callback) {
     this._callback.sortTypeChange = callback;
-    this.renderElement().addEventListener('click', this._sortTypeChangeHandler);
+    this.getElement().addEventListener('click', this._sortTypeChangeHandler);
   }
 }

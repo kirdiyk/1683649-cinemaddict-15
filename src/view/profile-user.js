@@ -1,4 +1,4 @@
-import AbstractClass from './abctract.js';
+import Abstract from './abctract.js';
 
 
 export const profileTemplate = () => (
@@ -8,7 +8,7 @@ export const profileTemplate = () => (
   </section>`
 );
 
-export default class UserProfile extends AbstractClass {
+export default class UserProfile extends Abstract {
   getTemplate() {
     return profileTemplate();
   }
