@@ -1,7 +1,7 @@
 import { removeComponent, render, replace } from '../util/render';
 import { RenderPosition, CardMode } from '../util/const.js';
-import FilmCard from '../view/card-film.js';
-import FilmDetail from '../view/details-film.js';
+import FilmCard from '../view/film-card.js';
+import FilmDetail from '../view/film-detail.js';
 
 export default class FilmCardPresenter {
   constructor(filmContainer, changeData, changeMode) {

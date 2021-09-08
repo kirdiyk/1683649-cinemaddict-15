@@ -2,17 +2,17 @@ import { FILM_CARD_EXTRA, FILM_CARD, RenderPosition, TOP_RATED } from '../util/c
 import { removeComponent, render } from '../util/render.js';
 import { sortByDate, sortByRating, updateItem, SortType  } from '../util/utils.js';
 
-import FilmCardPresenter from './film-card-presentor.js';
-import UserProfile from '../view/profile-user.js';
+import FilmCardPresenter from './film-card-presenter.js';
+import UserProfile from '../view/user-profile.js';
 import EmptyList from '../view/empty-list.js';
-import FilmsContainer from '../view/container-film.js';
-import FilmList from '../view/list-film.js';
-import FooterStats from '../view/stats-film-footer.js';
-import Menu from '../view/site-menu-list.js';
-import SortFilmList from '../view/sort-menu.js';
-import FilmListRated from '../view/popular-film.js';
+import FilmsContainer from '../view/films-container.js';
+import FilmList from '../view/film-list.js';
+import FooterStats from '../view/footer-stats.js';
+import Menu from '../view/menu.js';
+import SortFilmList from '../view/sort-film-list.js';
+import FilmListRated from '../view/film-list-rated.js';
 import FilmListCommented from '../view/film-list-commented.js';
-import ShowMoreButton from '../view/button-more.js';
+import ShowMoreButton from '../view/show-more-button.js';
 
 export default class Films {
   constructor(headerContainer, mainContainer, footerContainer, filters) {
@@ -200,14 +200,8 @@ export default class Films {
   }
 
   _getComments(id) {
-    let comments;
-    this._comments.forEach((comment) => {
-      if (comment.has(id)) {
-        comments = comment.get(id);
-      }
-    });
-
-    return comments;
+    const comments = this._comments.find((comment) => comment.has(id));
+    return comments.get(id);
   }
 
   _renderFilmCard(container, film, filmCardPresenter) {
