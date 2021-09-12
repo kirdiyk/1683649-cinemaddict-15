@@ -2,7 +2,7 @@ import { getDurationTime, getFormatDate, sliceDescription } from '../util/utils.
 import Abstract from './abctract.js';
 
 const createCardFilmTemplate = (film) => {
-  const { title, poster, description, date, genres, rating, comments, inWatchlist, isFavorite, isViewed } = film;
+  const { comments, title, description, poster, rating, genres, time, date, isFavorite, isWatchlist, isViewed } = film;
 
   const getRating = () => {
     if (rating < 4) {
@@ -13,36 +13,29 @@ const createCardFilmTemplate = (film) => {
     return 'film-card__rating--good';
   };
 
-  const watchlistClass = inWatchlist
-    ? 'film-card__controls-item--active'
-    : '';
-
-  const favoriteClass = isFavorite
-    ? 'film-card__controls-item--active'
-    : '';
-
-  const viewedClass = isViewed
-    ? 'film-card__controls-item--active'
-    : '';
-  return (
-    `<article class="film-card">
+  return `<article class="film-card">
     <h3 class="film-card__title" data-popup-open>${title}</h3>
     <p class="film-card__rating ${getRating()}">${rating}</p>
     <p class="film-card__info">
-      <span class="film-card__year">${getFormatDate(date.releaseDate, 'YYYY')}</span>
-      <span class="film-card__duration">${getDurationTime(date.runtime, 'minute')}</span>
+      <span class="film-card__year">${getFormatDate(date, 'YYYY')}</span>
+      <span class="film-card__duration">${getDurationTime(time, 'minute')}</span>
       <span class="film-card__genre">${genres[0]}</span>
     </p>
     <img src=${poster} alt="${title}" class="film-card__poster" data-popup-open>
     <p class="film-card__description">${sliceDescription(description)}</p>
     <a class="film-card__comments" data-popup-open>${comments.length} comments</a>
     <div class="film-card__controls">
-      <button class="film-card__controls-item film-card__controls-item--add-to-watchlist ${watchlistClass}" type="button">Add to watchlist </button>
-      <button class="film-card__controls-item film-card__controls-item--mark-as-watched ${viewedClass}" type="button">Mark as watched</button>
-      <button class="film-card__controls-item film-card__controls-item--favorite  ${favoriteClass}" type="button">Mark as favorite</button>
+      <button class="film-card__controls-item film-card__controls-item--add-to-watchlist ${isWatchlist ? 'film-card__controls-item--active' : ''} "type="button">
+        Add to watchlist
+      </button>
+      <button class="film-card__controls-item film-card__controls-item--mark-as-watched ${isViewed ? 'film-card__controls-item--active' : ''}" type="button">
+        Mark as watched
+      </button>
+      <button class="film-card__controls-item film-card__controls-item--favorite ${isFavorite ? 'film-card__controls-item--active' : ''}" type="button">
+        Mark as favorite
+      </button>
     </div>
-  </article>`
-  );
+  </article>`;
 };
 
 export default class FilmCard extends Abstract {

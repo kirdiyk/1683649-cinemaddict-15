@@ -8,7 +8,13 @@ export const createProfileTemplate = () => (
 );
 
 export default class UserProfile extends Abstract {
+  constructor(watchedFilms) {
+    super();
+
+    this._watchedFilms = watchedFilms;
+  }
+
   getTemplate() {
-    return createProfileTemplate();
+    return createProfileTemplate(this._watchedFilms);
   }
 }

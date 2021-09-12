@@ -14,7 +14,7 @@ import FilmListRated from '../view/film-list-rated.js';
 import FilmListCommented from '../view/film-list-commented.js';
 import ShowMoreButton from '../view/show-more-button.js';
 
-export default class Films {
+export default class FilmsPresenter {
   constructor(headerContainer, mainContainer, footerContainer, filters) {
     this._headerContainer = headerContainer;
     this._mainContainer = mainContainer;
