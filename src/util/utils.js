@@ -172,6 +172,8 @@ export const getUserRating = (watchedCount) => {
   }
 };
 
+export const isOnline = () => window.navigator.onLine;
+
 export const filterStatsByWatchingDate = (films, period) => {
   const deadline = dayjs().subtract(TIME, period);
   return films.filter((movie) => dayjs(movie.watchingDate).diff(deadline, 'minute') > 0);

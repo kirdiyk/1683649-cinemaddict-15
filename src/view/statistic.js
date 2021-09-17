@@ -1,8 +1,8 @@
-import { BAR_HEIGHT_SIZE, FilmDurationFormat, StatsFilterType } from '../utils/const';
-import { getGenres, getGenresCount, getTopGenre, getTotalFilmsDuration } from '../utils/date';
-import AbstractView from './abstract';
+import { BAR_SIZE, TimeFormat, StatsTime } from '../util/const.js';
+import { getGenres, getGenresCount, getTopGenre, getTotalTimeFilms } from '../util/utils.js';
 import Chart from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import Abstract from './abctract';
 
 const renderGenresChart = (statisticCtx, films) => new Chart(statisticCtx, {
   plugins: [ChartDataLabels],
@@ -70,49 +70,24 @@ const createStatisticTemplate = (rating, currentFilter, films) => (`
     </p>
     <form action="https://echo.htmlacademy.ru/" method="get" class="statistic__filters">
       <p class="statistic__filters-description">Show stats:</p>
-      <input
-        type="radio"
-        class="statistic__filters-input visually-hidden"
-        name="statistic-filter"
-        id="statistic-all-time"
-        value="${StatsFilterType.ALL}"
-        ${currentFilter === StatsFilterType.ALL ? 'checked' : ''}
-      >
+      <input type="radio" class="statistic__filters-input visually-hidden" name="statistic-filter" id="statistic-all-time" value="${StatsTime.ALL}" ${currentFilter === StatsTime.ALL ? 'checked' : ''}>
+
       <label for="statistic-all-time" class="statistic__filters-label">All time</label>
-      <input
-        type="radio"
-        class="statistic__filters-input visually-hidden"
-        name="statistic-filter"
-        id="statistic-today"
-        value="${StatsFilterType.TODAY}"
-        ${currentFilter === StatsFilterType.TODAY ? 'checked' : ''}
-      >
+
+      <input type="radio" class="statistic__filters-input visually-hidden" name="statistic-filter" id="statistic-today" value="${StatsTime.TODAY}" ${currentFilter === StatsTime.TODAY ? 'checked' : ''}>
+
       <label for="statistic-today" class="statistic__filters-label">Today</label>
-      <input
-        type="radio"
-        class="statistic__filters-input visually-hidden"
-        name="statistic-filter"
-        id="statistic-week"
-        value="${StatsFilterType.WEEK}"
-        ${currentFilter === StatsFilterType.WEEK ? 'checked' : ''}
-      >
+
+      <input type="radio" class="statistic__filters-input visually-hidden" name="statistic-filter" id="statistic-week" value="${StatsTime.WEEK}" ${currentFilter === StatsTime.WEEK ? 'checked' : ''}>
+
       <label for="statistic-week" class="statistic__filters-label">Week</label>
-      <input
-        type="radio"
-        class="statistic__filters-input visually-hidden"
-        name="statistic-filter"
-        id="statistic-month"
-        value="${StatsFilterType.MONTH}"
-        ${currentFilter === StatsFilterType.MONTH ? 'checked' : ''}
-      >
+
+      <input type="radio" class="statistic__filters-input visually-hidden" name="statistic-filter" id="statistic-month" value="${StatsTime.MONTH}" ${currentFilter === StatsTime.MONTH ? 'checked' : ''}>
+
       <label for="statistic-month" class="statistic__filters-label">Month</label>
-      <input
-        type="radio"
-        class="statistic__filters-input visually-hidden"
-        name="statistic-filter"
-        id="statistic-year" value="${StatsFilterType.YEAR}"
-        ${currentFilter === StatsFilterType.YEAR ? 'checked' : ''}
-      >
+
+      <input type="radio" class="statistic__filters-input visually-hidden" name="statistic-filter" id="statistic-year" value="${StatsTime.YEAR}" ${currentFilter === StatsTime.YEAR ? 'checked' : ''}>
+
       <label for="statistic-year" class="statistic__filters-label">Year</label>
     </form>
     <ul class="statistic__text-list">
@@ -126,13 +101,13 @@ const createStatisticTemplate = (rating, currentFilter, films) => (`
       <li class="statistic__text-item">
         <h4 class="statistic__item-title">Total duration</h4>
         <p class="statistic__item-text">
-        ${getTotalFilmsDuration(films, FilmDurationFormat.HOUR) > 1 ?
-    `${getTotalFilmsDuration(
+        ${getTotalTimeFilms(films, TimeFormat.HOUR) > 1 ?
+    `${getTotalTimeFilms(
       films,
-      FilmDurationFormat.HOUR,
+      TimeFormat.HOUR,
     )}<span class="statistic__item-description">h</span>`
     : ''}
-        ${getTotalFilmsDuration(films, FilmDurationFormat.MINUTE)}
+        ${getTotalTimeFilms(films, TimeFormat.MINUTE)}
         <span class="statistic__item-description">m</span></p>
       </li>
       <li class="statistic__text-item">
@@ -144,14 +119,14 @@ const createStatisticTemplate = (rating, currentFilter, films) => (`
       <canvas
         class="statistic__chart"
         width="1000"
-        height="${BAR_HEIGHT_SIZE * getGenres(films).size}"
+        height="${BAR_SIZE * getGenres(films).size}"
       >
       </canvas>
     </div>
   </section>
 `);
 
-export default class StatsScreen extends AbstractView {
+export default class StatsScreen extends Abstract {
   constructor(rating, currentFilter, films) {
     super();
 

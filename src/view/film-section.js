@@ -1,4 +1,4 @@
-import Abstract from './abstract.js';
+import Abstract from './abctract';
 
 const createFilmContainerTemplate = () =>
   '<section class="films"></section>';
