@@ -11,6 +11,7 @@ import { render } from './util/render.js';
 import Store from './store.js';
 import Offline from './view/offline.js';
 
+debugger;
 const api = new API(END_POINT, AUTHORIZATION);
 const store = new Store(STORE_NAME, window.localStorage);
 const managerAPI = new SiteManagment(api, store);

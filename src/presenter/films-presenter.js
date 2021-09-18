@@ -8,6 +8,7 @@ import FilmCardPresenter from './film-card-presenter.js';
 import FilmsContainer from '../view/films-container.js';
 import FilmList from '../view/film-list.js';
 import FooterStats from '../view/footer-stats.js';
+import FilmListCommented from '../view/film-list-commented.js';
 import FilmListRated from '../view/film-list-rated.js';
 import Loader from '../view/loader.js';
 //import EmptyList from '../view/empty-list.js';
@@ -33,8 +34,8 @@ export default class FilmsPresenter {
     this._commentedFilmCardPresenter = new Map();
 
     this._filmSection = new FilmSection();
-    this._filmsContainerComponent = new FilmsContainer();
-    this._filmListComponent = new FilmList();
+    this._filmsContainer = new FilmsContainer();
+    this._filmsList = new FilmList();
     this._filmStatsComponent = new FooterStats();
     this._loadingComponent = new Loader();
 
@@ -87,7 +88,7 @@ export default class FilmsPresenter {
   //   removeComponent(this._filmListCommentedComponent);
 
   //   this._emptyListComponent = new EmptyList(this._filterType);
-  //   render(this._filmsSection, this._emptyList, RenderPosition.BEFOREEND);
+  //   render(this._filmSection, this._emptyList, RenderPosition.BEFOREEND);
   // }
 
   _viewActionHandler(actionType, updateType, update) {
@@ -232,23 +233,58 @@ export default class FilmsPresenter {
 
   _renderFilmsSection() {
     // if (this._isLoading) {
-    //   render(this._mainContainer, this._filmsSection, RenderPosition.BEFOREEND);
+    //   render(this._mainContainer, this._filmSection, RenderPosition.BEFOREEND);
     //   this._renderLoading();
     //   return;
     // }
 
     this._renderSortFilmList();
 
-    render(this._mainContainer, this._filmsSection, RenderPosition.BEFOREEND);
+    render(this._mainContainer, this._filmSection, RenderPosition.BEFOREEND);
 
     this._renderAllFilms();
-    this._renderRatedFilms();
+    this._renderRatedFilmCards();
     this._renderCommentedFilms();
   }
 
   // _renderLoading() {
-  //   render(this._filmsSection, this._loadingComponent, RenderPosition.BEFOREEND);
+  //   render(this._filmSection, this._loadingComponent, RenderPosition.BEFOREEND);
   // }
+
+  _renderCommentedFilms() {
+    if (this._filmListCommentedContainer !== null && this._filmListCommentedComponent !== null) {
+      removeComponent(this._filmListCommentedComponent);
+      removeComponent(this._filmListCommentedContainer);
+      this._filmListCommentedContainer = null;
+      this._filmListCommentedComponent = null;
+    }
+
+    if (!this._renderFilms().length) {
+      return;
+    }
+
+    const films = [...this._filmsModel.getCommentedFilms()];
+
+    if (films[0].comments.length === 0) {
+      return;
+    }
+
+    this._filmListCommentedContainer = new FilmsContainer();
+    this._filmListCommentedComponent = new FilmListCommented();
+
+    render(this._filmsSection, this._filmListCommentedComponent, RenderPosition.BEFOREEND);
+    render(
+      this._filmListCommentedComponent,
+      this._filmListCommentedContainer,
+      RenderPosition.BEFOREEND,
+    );
+
+    this._renderFilmCards(
+      this._filmListCommentedContainer,
+      films,
+      this._commentedFilmCardPresenter,
+    );
+  }
 
   _renderSortFilmList() {
     if (this._sortFilmListComponent !== null) {
@@ -269,9 +305,9 @@ export default class FilmsPresenter {
     //   this._renderEmptyFilmsMessage();
     //   return;
     // }
-
-    render(this._filmsSection, this._filmsList, RenderPosition.AFTERBEGIN);
-    render(this._filmsListContainer, this._filmsList, RenderPosition.BEFOREEND);
+    //console.log(this._filmSection, this._filmsList, RenderPosition.AFTERBEGIN);
+    render(this._filmSection, this._filmsList, RenderPosition.AFTERBEGIN);
+    render(this._filmsContainer, this._filmsList, RenderPosition.BEFOREEND);
 
     this._renderFilmCards(
       this._filmsListContainer,
@@ -300,7 +336,7 @@ export default class FilmsPresenter {
     }
     this._filmListRatedContainer = new FilmsContainer();
     this._filmListRatedComponent = new FilmListRated();
-    render(this._filmsSection, this._filmListRatedComponent, RenderPosition.BEFOREEND);
+    render(this._filmSection, this._filmListRatedComponent, RenderPosition.BEFOREEND);
     render(this._filmListRatedComponent, this._filmListRatedContainer, RenderPosition.BEFOREEND);
     this._renderFilmCards(this._filmListRatedContainer, films, this._ratedFilmCardPresenter);
   }

@@ -23,6 +23,17 @@ export default class API {
     throw err;
   }
 
+  sync(data) {
+    return this._load({
+      url: '/movies/sync',
+      method: Method.POST,
+      body: JSON.stringify(data),
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+    })
+      .then(API.toJSON);
+  }
+
+
   getFilmsData() {
     return this._load({ url: 'movies' })
       .then(API.toJSON)
