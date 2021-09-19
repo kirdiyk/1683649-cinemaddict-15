@@ -51,7 +51,7 @@ export const ProfileRank = {
   MOVIE_BUFF: 'Movie Buff',
 };
 
-export const AUTHORIZATION = 'Basic hkelefhjjh89534707509jheh';
+export const AUTHORIZATION = 'Basic eo0w83hik29889a';
 export const END_POINT = 'https://15.ecmascript.pages.academy/cinemaddict';
 
 export const TypeList = {

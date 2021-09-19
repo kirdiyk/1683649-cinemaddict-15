@@ -17,15 +17,15 @@ const managerAPI = new SiteManagment(api, store);
 
 const message = new Offline(OFFLINE_MESSAGE);
 
-const filmsModel = new FilmModel();
+const filmModel = new FilmModel();
 const filterModel = new FilterModel();
 
 const siteMainElement = document.querySelector('.main');
 const siteHeaderElement = document.querySelector('.header');
 const siteFooterElement = document.querySelector('.footer');
 
-new FilterPresenter(siteHeaderElement, siteMainElement, filterModel, filmsModel).init();
-new FilmsPresenter(siteMainElement, siteFooterElement, filmsModel, filterModel, managerAPI).init();
+new FilterPresenter(siteHeaderElement, siteMainElement, filterModel, filmModel).init();
+new FilmsPresenter(siteMainElement, siteFooterElement, filmModel, filterModel, managerAPI).init();
 
 if (!isOnline()) {
   render(document.body, message, RenderPosition.BEFOREEND);
@@ -35,20 +35,20 @@ if (!isOnline()) {
 
 managerAPI.getFilmsData()
   .then((films) => {
-    filmsModel.setFilms(UpdateType.INIT, films);
+    filmModel.setFilms(UpdateType.INIT, films);
     render(
       siteFooterElement,
-      new FooterStats(filmsModel.getFilms()),
+      new FooterStats(filmModel.getFilms()),
       RenderPosition.BEFOREEND,
     );
   })
   .catch(() => {
-    filmsModel.setFilms(UpdateType.INIT, []);
+    filmModel.setFilms(UpdateType.INIT, []);
     render(siteFooterElement, new FooterStats(), RenderPosition.BEFOREEND);
   });
 
 window.addEventListener('load', () => {
-  navigator.serviceWorker.register('../public/sw.js');
+  navigator.serviceWorker.register('/sw.js');
 });
 
 window.addEventListener('online', () => {
