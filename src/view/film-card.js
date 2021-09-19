@@ -2,12 +2,12 @@ import { getDurationTime, getFormatDate, sliceDescription } from '../util/utils.
 import Abstract from './abctract.js';
 
 const createCardFilmTemplate = (film) => {
-  const { comments, title, description, poster, rating, genres, time, date, isFavorite, isWatchlist, isViewed } = film;
+  const { comments, title, description, poster, filmRating, genres, runtime, releaseDate, isFavorite, isWatchlist, isViewed } = film;
 
   const getRating = () => {
-    if (rating < 4) {
+    if (filmRating < 4) {
       return 'film-card__rating--poor';
-    } else if (rating > 4 && rating < 6) {
+    } else if (filmRating > 4 && filmRating < 6) {
       return 'film-card__rating--average';
     }
     return 'film-card__rating--good';
@@ -15,10 +15,10 @@ const createCardFilmTemplate = (film) => {
 
   return `<article class="film-card">
     <h3 class="film-card__title" data-popup-open>${title}</h3>
-    <p class="film-card__rating ${getRating()}">${rating}</p>
+    <p class="film-card__rating ${getRating()}">${filmRating}</p>
     <p class="film-card__info">
-      <span class="film-card__year">${getFormatDate(date, 'YYYY')}</span>
-      <span class="film-card__duration">${getDurationTime(time, 'minute')}</span>
+    <span class="film-card__year">${getFormatDate(releaseDate, 'YYYY')}</span>
+    <span class="film-card__duration">${getDurationTime(runtime, 'minute')}</span>
       <span class="film-card__genre">${genres[0]}</span>
     </p>
     <img src=${poster} alt="${title}" class="film-card__poster" data-popup-open>

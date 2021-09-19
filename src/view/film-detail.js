@@ -5,23 +5,25 @@ import he from 'he';
 import { isOnline } from '../util/utils.js';
 
 const createCommentItemTemplate = (commentsData = {}) => {
-  const { author, date, emoji, text } = commentsData;
+  const { id, author, date, emotion, comment } = commentsData;
 
-  return `<li class="film-details__comment">
+  return (
+    `<li class="film-details__comment">
         <span class="film-details__comment-emoji">
-          <img src="./images/emoji/${emoji}.png" width="55" height="55" alt="emoji-smile">
+          <img src="./images/emoji/${emotion}.png" width="55" height="55" alt="emoji-${emotion}">
         </span>
       <div>
-        <p class="film-details__comment-text">${text}</p>
+        <p class="film-details__comment-text">${comment}</p>
         <p class="film-details__comment-info">
           <span class="film-details__comment-author">${author}</span>
           <span class="film-details__comment-day">
             ${getRelativeTimeFromDate(date)}
           </span>
-          <button class="film-details__comment-delete">Delete</button>
+          <button class="film-details__comment-delete" data-comment-id="${id}">Delete</button>
         </p>
       </div>
-    </li>`;
+    </li>`
+  );
 };
 
 const createEmojiItemTemplate = (selectEmoji, emotion) =>
