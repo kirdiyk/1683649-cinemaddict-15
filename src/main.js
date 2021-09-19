@@ -11,7 +11,6 @@ import { render } from './util/render.js';
 import Store from './store.js';
 import Offline from './view/offline.js';
 
-debugger;
 const api = new API(END_POINT, AUTHORIZATION);
 const store = new Store(STORE_NAME, window.localStorage);
 const managerAPI = new SiteManagment(api, store);
@@ -49,7 +48,7 @@ managerAPI.getFilmsData()
   });
 
 window.addEventListener('load', () => {
-  navigator.serviceWorker.register('/sw.js');
+  navigator.serviceWorker.register('../public/sw.js');
 });
 
 window.addEventListener('online', () => {

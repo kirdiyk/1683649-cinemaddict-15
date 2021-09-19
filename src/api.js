@@ -1,4 +1,4 @@
-import FilmsModel from './model/film-model.js';
+import FilmModel from './model/film-model.js';
 import { Method } from './util/const.js';
 
 export default class API {
@@ -37,18 +37,18 @@ export default class API {
   getFilmsData() {
     return this._load({ url: 'movies' })
       .then(API.toJSON)
-      .then((films) => films.map(FilmsModel.adaptToClient));
+      .then((films) => films.map(FilmModel.adaptToClient));
   }
 
   updateFilm(film) {
     return this._load({
       url: `movies/${film.id}`,
       method: Method.PUT,
-      body: JSON.stringify(FilmsModel.adaptToServer(film)),
+      body: JSON.stringify(FilmModel.adaptToServer(film)),
       headers: new Headers({ 'Content-Type': 'application/json' }),
     })
       .then(API.toJSON)
-      .then(FilmsModel.adaptToClient);
+      .then(FilmModel.adaptToClient);
   }
 
   getCommentsList(film) {
