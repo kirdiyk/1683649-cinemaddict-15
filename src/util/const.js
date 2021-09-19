@@ -78,3 +78,5 @@ export const STORE_PREFIX = 'cinemaddict-localstorage';
 export const STORE_VER = 'v15';
 export const STORE_NAME = `${STORE_PREFIX}-${STORE_VER}`;
 export const OFFLINE_MESSAGE = 'No network access';
+
+export const REACTIONS = ['angry', 'sleeping', 'puke', 'smile'];
