@@ -13,8 +13,8 @@ export default class FilmCardPresenter {
     this._filterType = filterType;
     this._api = api;
 
-    this._filmCardComponent = null;
     this._filmPopupComponent = null;
+    this._filmCardComponent = null;
     this._commentsModel = new CommentModel();
 
     this._switchViewedClickHadler = this._switchViewedClickHadler.bind(this);
@@ -48,9 +48,6 @@ export default class FilmCardPresenter {
       film,
       this._commentsModel.getComments(),
     ));
-
-    this._filmCardComponent.setFilmCardClickHandler(() => this._renderFilmPopup(film));
-
     this._filmCardComponent.setViewedClickHadler(this._switchViewedClickHadler);
     this._filmCardComponent.setFavoriteClickHadler(this._switchFavoriteClickHadler);
     this._filmCardComponent.setWatchlistClickHadler(this._switchWatchlistClickHadler);
@@ -60,7 +57,7 @@ export default class FilmCardPresenter {
       return;
     }
 
-    if (this._filmContainer.getElement().contains(prevFilmCardComponent.getElement())) {
+    if (this._filmContainer.renderElement().contains(prevFilmCardComponent.renderElement())) {
       replace(this._filmCardComponent, prevFilmCardComponent);
     }
 
