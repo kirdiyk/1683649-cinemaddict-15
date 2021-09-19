@@ -186,13 +186,13 @@ export default class FilmCardPresenter {
           this._filmPopupComponent.getElement().scrollTo(0, this._scrollPosition);
         }
       },
-      // () => {
-      //   if (this._filmPopupComponent) {
-      //     this._filmPopupComponent.shake();
-      //   } else {
-      //     this._filmCardComponent.shake();
-      //   }
-      // },
+      () => {
+        if (this._filmPopupComponent) {
+          this._filmPopupComponent.shake();
+        } else {
+          this._filmCardComponent.shake();
+        }
+      },
     );
   }
 
