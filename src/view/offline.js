@@ -27,9 +27,9 @@ export default class Offline extends Abstract {
 
   removeElement() {
     super.removeElement();
-
-    if (document.querySelector('.notification')) {
-      document.querySelector('.notification').remove();
+    const notification = document.querySelector('.notification');
+    if (notification) {
+      notification.remove();
     }
   }
 }

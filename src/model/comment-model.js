@@ -8,10 +8,6 @@ export default class CommentModel extends AbstractObserver {
   }
 
   setComments(comments) {
-    if (comments === null) {
-      this._comments = comments;
-    }
-
     this._comments = [...comments];
   }
 

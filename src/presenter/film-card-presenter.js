@@ -38,7 +38,7 @@ export default class FilmCardPresenter {
         this._commentsModel.setComments(response);
       }
     }).catch(() => {
-      this._commentsModel.setComments(null);
+      this._commentsModel.setComments([]);
     });
 
     const prevFilmCardComponent = this._filmCardComponent;
