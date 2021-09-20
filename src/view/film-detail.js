@@ -119,13 +119,13 @@ const createFilmDetailsTemplate = (film, commentsItems) => {
           </div>
         </div>
         <section class="film-details__controls">
-          <button type="button" class="film-details__control-button ${watchlist}" id="watchlist" name="watchlist" ${isDisabled || isUpdating ? 'disabled' : ''}>
+          <button type="button" class="film-details__control-button film-details__control-button--watchlist ${watchlist}" id="watchlist" name="watchlist" ${isDisabled || isUpdating ? 'disabled' : ''}>
             ${isUpdating ? 'Updating...' : 'Add to watchlist'}
           </button>
-          <button type="button" class="film-details__control-button ${viewed}" id="watched" name="watched" ${isDisabled || isUpdating ? 'disabled' : ''}>
+          <button type="button" class="film-details__control-button film-details__control-button--watched ${viewed}" id="watched" name="watched" ${isDisabled || isUpdating ? 'disabled' : ''}>
             ${isUpdating ? 'Updating...' : 'Already watched'}
           </button>
-          <button type="button" class="film-details__control-button ${favorite}" id="favorite" name="favorite" ${isDisabled || isUpdating ? 'disabled' : ''}>
+          <button type="button" class="film-details__control-button film-details__control-button--favorite ${favorite}" id="favorite" name="favorite" ${isDisabled || isUpdating ? 'disabled' : ''}>
             ${isUpdating ? 'Updating...' : 'Add to favorites'}
           </button>
         </section>

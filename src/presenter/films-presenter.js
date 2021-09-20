@@ -1,4 +1,4 @@
-import {  FILM_CARD, RenderPosition, UpdateType, FilterType, UserAction, TypeList} from '../util/const.js';
+import {  FILM_CARD, RenderPosition, UpdateType, FilterType, StatsTime, UserAction, TypeList} from '../util/const.js';
 import { removeComponent, render } from '../util/render.js';
 import { sortByDate, sortByRating, SortType, filterStatsByWatchingDate, filter, getUserRating} from '../util/utils.js';
 import FilmSection from '../view/film-section.js';
@@ -334,19 +334,19 @@ export default class FilmsPresenter {
     removeComponent(this._statsComponent);
 
     switch (this._currentStatsFilter) {
-      case FilterType.ALL:
+      case StatsTime.ALL:
         this._renderStatsScreen(filtredFilms);
         break;
-      case FilterType.TODAY:
+      case StatsTime.TODAY:
         this._renderStatsScreen(filterStatsByWatchingDate(filtredFilms, 'd'));
         break;
-      case FilterType.WEEK:
+      case StatsTime.WEEK:
         this._renderStatsScreen(filterStatsByWatchingDate(filtredFilms, 'w'));
         break;
-      case FilterType.MONTH:
+      case StatsTime.MONTH:
         this._renderStatsScreen(filterStatsByWatchingDate(filtredFilms, 'M'));
         break;
-      case FilterType.YEAR:
+      case StatsTime.YEAR:
         this._renderStatsScreen(filterStatsByWatchingDate(filtredFilms, 'y'));
         break;
     }

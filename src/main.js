@@ -35,7 +35,6 @@ if (!isOnline()) {
 
 managerAPI.getFilmsData()
   .then((films) => {
-    console.log(films);
     filmModel.setFilms(UpdateType.INIT, films);
     render(
       siteFooterElement,
@@ -43,8 +42,7 @@ managerAPI.getFilmsData()
       RenderPosition.BEFOREEND,
     );
   })
-  .catch((e) => {
-    console.log(e);
+  .catch(() => {
     filmModel.setFilms(UpdateType.INIT, []);
     render(siteFooterElement, new FooterStats(), RenderPosition.BEFOREEND);
   });
