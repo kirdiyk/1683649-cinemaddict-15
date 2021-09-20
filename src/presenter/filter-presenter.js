@@ -2,7 +2,7 @@ import { removeComponent, render, replace } from '../util/render.js';
 import { FilterType, RenderPosition, UpdateType } from '../util/const.js';
 import { filter } from '../util/utils.js';
 import Filter from '../view/filter.js';
-import UserProfileView from '../view/user-profile.js';
+import UserProfile from '../view/user-profile.js';
 
 export default class FilterPresenter {
   constructor(headerContainer, filterContainer, filterModel, filmModel) {
@@ -27,7 +27,7 @@ export default class FilterPresenter {
     const prevProfileComponent = this._profileComponent;
 
     this._filterComponent = new Filter(filters, this._filterModel.getFilter());
-    this._profileComponent = new UserProfileView(this._getWatchedFilmsCount());
+    this._profileComponent = new UserProfile(this._getWatchedFilmsCount());
     this._filterComponent.setFilterTypeChangeHandler(this._filterTypeChangeHandler);
 
     if (prevFilterComponent === null && prevProfileComponent === null) {

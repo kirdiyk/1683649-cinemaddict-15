@@ -1,8 +1,8 @@
-import { BAR_SIZE, TimeFormat} from '../util/const.js';
+import { BAR_SIZE, StatsTime, TimeFormat} from '../util/const.js';
 import { getGenres, getGenresCount, getTopGenre, getTotalTimeFilms } from '../util/utils.js';
 import Chart from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import Abstract from './abctract';
+import Abstract from './abctract.js';
 
 const renderGenresChart = (statisticCtx, films) => new Chart(statisticCtx, {
   plugins: [ChartDataLabels],
@@ -63,96 +63,97 @@ const renderGenresChart = (statisticCtx, films) => new Chart(statisticCtx, {
 
 const createStatisticTemplate = (rating, currentFilter, films) => (
   `<section class="statistic">
-    <p class="statistic__rank">
-      Your rank
-      <img class="statistic__img" src="images/bitmap@2x.png" alt="Avatar" width="35" height="35">
-      <span class="statistic__rank-label">${rating}</span>
-    </p>
-    <form action="https://echo.htmlacademy.ru/" method="get" class="statistic__filters">
-      <p class="statistic__filters-description">Show stats:</p>
-      <input
-        type="radio"
-        class="statistic__filters-input visually-hidden"
-        name="statistic-filter"
-        id="statistic-all-time"
-        value="${TimeFormat.ALL}"
-        ${currentFilter === TimeFormat.ALL ? 'checked' : ''}
-      >
-      <label for="statistic-all-time" class="statistic__filters-label">All time</label>
-      <input
-        type="radio"
-        class="statistic__filters-input visually-hidden"
-        name="statistic-filter"
-        id="statistic-today"
-        value="${TimeFormat.TODAY}"
-        ${currentFilter === TimeFormat.TODAY ? 'checked' : ''}
-      >
-      <label for="statistic-today" class="statistic__filters-label">Today</label>
-      <input
-        type="radio"
-        class="statistic__filters-input visually-hidden"
-        name="statistic-filter"
-        id="statistic-week"
-        value="${TimeFormat.WEEK}"
-        ${currentFilter === TimeFormat.WEEK ? 'checked' : ''}
-      >
-      <label for="statistic-week" class="statistic__filters-label">Week</label>
-      <input
-        type="radio"
-        class="statistic__filters-input visually-hidden"
-        name="statistic-filter"
-        id="statistic-month"
-        value="${TimeFormat.MONTH}"
-        ${currentFilter === TimeFormat.MONTH ? 'checked' : ''}
-      >
-      <label for="statistic-month" class="statistic__filters-label">Month</label>
-      <input
-        type="radio"
-        class="statistic__filters-input visually-hidden"
-        name="statistic-filter"
-        id="statistic-year" value="${TimeFormat.YEAR}"
-        ${currentFilter === TimeFormat.YEAR ? 'checked' : ''}
-      >
-      <label for="statistic-year" class="statistic__filters-label">Year</label>
-    </form>
-    <ul class="statistic__text-list">
-      <li class="statistic__text-item">
-        <h4 class="statistic__item-title">You watched</h4>
-        <p class="statistic__item-text">
-          ${films.length}
-        <span class="statistic__item-description">
-          ${films.length > 1 ? 'movies' : 'movie'}</span></p>
-      </li>
-      <li class="statistic__text-item">
-        <h4 class="statistic__item-title">Total duration</h4>
-        <p class="statistic__item-text">
-      ${getTotalTimeFilms(films, TimeFormat.DAY) > 0 ?
+  <p class="statistic__rank">
+    Your rank
+    <img class="statistic__img" src="images/bitmap@2x.png" alt="Avatar" width="35" height="35">
+    <span class="statistic__rank-label">${rating}</span>
+  </p>
+  <form action="https://echo.htmlacademy.ru/" method="get" class="statistic__filters">
+    <p class="statistic__filters-description">Show stats:</p>
+    <input
+      type="radio"
+      class="statistic__filters-input visually-hidden"
+      name="statistic-filter"
+      id="statistic-all-time"
+      value="${StatsTime.ALL}"
+      ${currentFilter === StatsTime.ALL ? 'checked' : ''}
+    >
+    <label for="statistic-all-time" class="statistic__filters-label">All time</label>
+    <input
+      type="radio"
+      class="statistic__filters-input visually-hidden"
+      name="statistic-filter"
+      id="statistic-today"
+      value="${StatsTime.TODAY}"
+      ${currentFilter === StatsTime.TODAY ? 'checked' : ''}
+    >
+    <label for="statistic-today" class="statistic__filters-label">Today</label>
+    <input
+      type="radio"
+      class="statistic__filters-input visually-hidden"
+      name="statistic-filter"
+      id="statistic-week"
+      value="${StatsTime.WEEK}"
+      ${currentFilter === StatsTime.WEEK ? 'checked' : ''}
+    >
+    <label for="statistic-week" class="statistic__filters-label">Week</label>
+    <input
+      type="radio"
+      class="statistic__filters-input visually-hidden"
+      name="statistic-filter"
+      id="statistic-month"
+      value="${StatsTime.MONTH}"
+      ${currentFilter === StatsTime.MONTH ? 'checked' : ''}
+    >
+    <label for="statistic-month" class="statistic__filters-label">Month</label>
+    <input
+      type="radio"
+      class="statistic__filters-input visually-hidden"
+      name="statistic-filter"
+      id="statistic-year" value="${StatsTime.YEAR}"
+      ${currentFilter === StatsTime.YEAR ? 'checked' : ''}
+    >
+    <label for="statistic-year" class="statistic__filters-label">Year</label>
+  </form>
+  <ul class="statistic__text-list">
+    <li class="statistic__text-item">
+      <h4 class="statistic__item-title">You watched</h4>
+      <p class="statistic__item-text">
+        ${films.length}
+      <span class="statistic__item-description">
+        ${films.length > 1 ? 'movies' : 'movie'}</span></p>
+    </li>
+    <li class="statistic__text-item">
+      <h4 class="statistic__item-title">Total duration</h4>
+      <p class="statistic__item-text">
+    ${getTotalTimeFilms(films, TimeFormat.DAY) > 0 ?
     `${getTotalTimeFilms(
       films,
       TimeFormat.DAY,
     )} <span class="statistic__item-description">d</span>` : ''}
-      ${getTotalTimeFilms(films, TimeFormat.HOUR) > 0 ? `${getTotalTimeFilms(
+    ${getTotalTimeFilms(films, TimeFormat.HOUR) > 0 ? `${getTotalTimeFilms(
     films,
     TimeFormat.HOUR,
   )}
-       <span class="statistic__item-description">h</span>` : ''}
-        ${getTotalTimeFilms(films, TimeFormat.MINUTE)}
-        <span class="statistic__item-description">m</span></p>
-      </li>
-      <li class="statistic__text-item">
-        <h4 class="statistic__item-title">Top genre</h4>
-        <p class="statistic__item-text">${films.length ? getTopGenre(films) : ''}</p>
-      </li>
-    </ul>
-    <div class="statistic__chart-wrap">
-      <canvas
-        class="statistic__chart"
-        width="1000"
-        height="${BAR_SIZE * getGenres(films).size}"
-      >
-      </canvas>
-    </div>
-  </section>
+     <span class="statistic__item-description">h</span>` : ''}
+
+      ${getTotalTimeFilms(films, TimeFormat.MINUTE)}
+      <span class="statistic__item-description">m</span></p>
+    </li>
+    <li class="statistic__text-item">
+      <h4 class="statistic__item-title">Top genre</h4>
+      <p class="statistic__item-text">${films.length ? getTopGenre(films) : ''}</p>
+    </li>
+  </ul>
+  <div class="statistic__chart-wrap">
+    <canvas
+      class="statistic__chart"
+      width="1000"
+      height="${BAR_SIZE * getGenres(films).size}"
+    >
+    </canvas>
+  </div>
+</section>
 `);
 
 export default class StatsScreen extends Abstract {
@@ -219,4 +220,3 @@ export default class StatsScreen extends Abstract {
     this._statisticCart = renderGenresChart(statisticCtx, this._films);
   }
 }
-
