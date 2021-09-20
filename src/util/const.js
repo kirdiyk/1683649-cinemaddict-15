@@ -80,3 +80,4 @@ export const STORE_NAME = `${STORE_PREFIX}-${STORE_VER}`;
 export const OFFLINE_MESSAGE = 'No network access';
 
 export const REACTIONS = ['angry', 'sleeping', 'puke', 'smile'];
+export const SHAKE_TIMEOUT = 700;

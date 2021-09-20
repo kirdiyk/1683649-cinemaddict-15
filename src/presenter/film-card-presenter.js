@@ -89,6 +89,7 @@ export default class FilmCardPresenter {
     this._showPopup();
     this.body.classList.add('hide-overflow');
     this._filmPopupComponent.getElement().scrollTo(0, this._scrollPosition);
+
     this._filmPopupComponent.setClosePopupClickHandler(this._hidePopup);
     this._filmPopupComponent.setViewedClickHadler(this._switchViewedClickHadler);
     this._filmPopupComponent.setFavoriteClickHadler(this._switchFavoriteClickHadler);
@@ -179,19 +180,6 @@ export default class FilmCardPresenter {
       {
         ...this._film,
         isWatchlist: !this._film.isWatchlist,
-      },
-      () => {
-        if (this._filmPopupComponent) {
-          this._renderFilmPopup(this._film, this._commentsModel.getComments());
-          this._filmPopupComponent.getElement().scrollTo(0, this._scrollPosition);
-        }
-      },
-      () => {
-        if (this._filmPopupComponent) {
-          this._filmPopupComponent.shake();
-        } else {
-          this._filmCardComponent.shake();
-        }
       },
     );
   }

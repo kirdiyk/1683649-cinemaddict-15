@@ -24,4 +24,12 @@ export default class Offline extends Abstract {
   getTemplate() {
     return createMessageTemplate(this._textMessage);
   }
+
+  removeElement() {
+    super.removeElement();
+
+    if (document.querySelector('.notification')) {
+      document.querySelector('.notification').remove();
+    }
+  }
 }
