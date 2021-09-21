@@ -20,11 +20,11 @@ export default class EmptyList extends Abstract {
   constructor(data) {
     super();
 
-    this._data = data;
+    this._filterType = data;
   }
 
   getTemplate() {
-    return createEmptyListTemplate(this._data);
+    return createEmptyListTemplate(this._filterType);
   }
 }
 

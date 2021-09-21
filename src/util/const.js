@@ -25,13 +25,6 @@ export const FilterType = {
   STATS: 'Stats',
 };
 
-export const UserAction = {
-  UPDATE_FILM: 'UPDATE_FILM',
-  ADD_COMMENT: 'ADD_COMMENT',
-  DELETE_COMMENT: 'DELETE_COMMENT',
-  CHANGE_FILTER: 'CHANGE_FILTER',
-};
-
 export const UpdateType = {
   INIT: 'INIT',
   PATCH: 'PATCH',
@@ -72,6 +65,13 @@ export const StatsTime = {
   MONTH: 'month',
   WEEK: 'week',
   TODAY: 'today',
+};
+
+export const UserAction = {
+  UPDATE_FILM: 'UPDATE_FILM',
+  UPDATE_POPUP: 'UPDATE_POPUP',
+  ADD_COMMENT: 'ADD_COMMENT',
+  DELETE_COMMENT: 'DELETE_COMMENT',
 };
 
 export const STORE_PREFIX = 'cinemaddict-localstorage';

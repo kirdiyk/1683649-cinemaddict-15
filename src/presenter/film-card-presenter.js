@@ -1,5 +1,5 @@
 import { removeComponent, render, replace } from '../util/render';
-import { RenderPosition, CardMode, UserAction, UpdateType } from '../util/const.js';
+import { RenderPosition, CardMode, UserAction, UpdateType, FilterType } from '../util/const.js';
 import FilmCard from '../view/film-card.js';
 import FilmDetail from '../view/film-detail.js';
 import CommentModel from '../model/comment-model.js';
@@ -126,7 +126,7 @@ export default class FilmCardPresenter {
       this._scrollPosition = this._filmPopupComponent.getScrollPosition();
     }
 
-    const currentFilterType = this._filterType === 'All movies' || this._filterType !== 'History';
+    const currentFilterType = this._filterType === FilterType.ALL || this._filterType !== FilterType.HISTORY;
     const isAlreadyViewed = this._film.isViewed;
 
     if (!currentFilterType && this._filmPopupComponent) {
@@ -147,7 +147,7 @@ export default class FilmCardPresenter {
     if (this._filmPopupComponent) {
       this._scrollPosition = this._filmPopupComponent.getScrollPosition();
     }
-    const currentFilterType = this._filterType === 'All movies' || this._filterType !== 'Favorites';
+    const currentFilterType = this._filterType === FilterType.ALL || this._filterType !== FilterType.FAVORITES;
 
     if (!currentFilterType && this._filmPopupComponent) {
       this._hidePopup();
@@ -168,7 +168,7 @@ export default class FilmCardPresenter {
       this._scrollPosition = this._filmPopupComponent.getScrollPosition();
     }
 
-    const currentFilterType = this._filterType === 'All movies' || this._filterType !== 'Watchlist';
+    const currentFilterType = this._filterType === FilterType.ALL || this._filterType !== FilterType.WATCHLIST;
 
     if (!currentFilterType && this._filmPopupComponent) {
       this._hidePopup();
