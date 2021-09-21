@@ -57,7 +57,7 @@ export default class FilmCardPresenter {
       return;
     }
 
-    if (this._filmContainer.renderElement().contains(prevFilmCardComponent.renderElement())) {
+    if (this._filmContainer.getElement().contains(prevFilmCardComponent.getElement())) {
       replace(this._filmCardComponent, prevFilmCardComponent);
     }
 
@@ -261,14 +261,14 @@ export default class FilmCardPresenter {
     this._api.getCommentsList(this._film).then((response) => {
       this._commentsModel.setComments(response);
       this._renderFilmPopup(this._film, this._commentsModel.getComments());
-      this._filmPopupComponent.renderElement().scrollTo(0, this._scrollPosition);
+      this._filmPopupComponent.getElement().scrollTo(0, this._scrollPosition);
     });
   }
 
   rerenderPopup() {
     if (this._filmPopupComponent) {
       this._renderFilmPopup(this._film, this._commentsModel.getComments());
-      this._filmPopupComponent.renderElement().scrollTo(0, this._scrollPosition);
+      this._filmPopupComponent.getElement().scrollTo(0, this._scrollPosition);
     }
   }
 
