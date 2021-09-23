@@ -29,7 +29,7 @@ const createMenuTemplate = (menuItems) => {
   );
 };
 
-export default class Menu extends Abstract {
+class Menu extends Abstract {
   constructor(filters) {
     super();
     this._filters = filters;
@@ -39,3 +39,4 @@ export default class Menu extends Abstract {
     return createMenuTemplate(this._filters);
   }
 }
+export default Menu;

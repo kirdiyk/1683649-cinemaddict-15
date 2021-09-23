@@ -1,6 +1,6 @@
 import Abstract from './abctract.js';
 
-export default class Smart extends Abstract {
+class Smart extends Abstract {
   constructor() {
     super();
 
@@ -37,3 +37,4 @@ export default class Smart extends Abstract {
     throw new Error('Abstract method not implemented: resetHandlers');
   }
 }
+export default Smart;

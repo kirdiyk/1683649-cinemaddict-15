@@ -4,7 +4,7 @@ import { filter } from '../util/utils.js';
 import Filter from '../view/filter.js';
 import UserProfile from '../view/user-profile.js';
 
-export default class FilterPresenter {
+class FilterPresenter {
   constructor(headerContainer, filterContainer, filterModel, filmModel) {
     this._headerContainer = headerContainer;
     this._filterContainer = filterContainer;
@@ -88,3 +88,4 @@ export default class FilterPresenter {
     ];
   }
 }
+export default FilterPresenter;

@@ -8,7 +8,7 @@ const createProfileTemplate = (watchedFilms) => (
   </section>`
 );
 
-export default class UserProfile extends Abstract {
+class UserProfile extends Abstract {
   constructor(watchedFilms) {
     super();
 
@@ -19,3 +19,4 @@ export default class UserProfile extends Abstract {
     return createProfileTemplate(this._watchedFilms);
   }
 }
+export default UserProfile;

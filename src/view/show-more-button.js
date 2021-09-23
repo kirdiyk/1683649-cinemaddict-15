@@ -4,7 +4,7 @@ const showMoreButtonTemplate = () => (
   '<button class="films-list__show-more">Show more</button>'
 );
 
-export default class ShowMoreButton extends Abstract {
+class ShowMoreButton extends Abstract {
   constructor() {
     super();
 
@@ -27,3 +27,5 @@ export default class ShowMoreButton extends Abstract {
     this._callback.click = callback;
   }
 }
+
+export default ShowMoreButton;

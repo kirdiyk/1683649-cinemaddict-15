@@ -21,7 +21,7 @@ const createSortFilmListTemplate = (activeSortType) => (
   </ul>`
 );
 
-export default class SortFilmList extends Abstract {
+class SortFilmList extends Abstract {
   constructor(activeSortType) {
     super();
 
@@ -49,3 +49,4 @@ export default class SortFilmList extends Abstract {
     this.getElement().addEventListener('click', this._sortTypeChangeHandler);
   }
 }
+export default SortFilmList;

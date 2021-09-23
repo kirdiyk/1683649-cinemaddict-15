@@ -1,7 +1,7 @@
 import FilmModel from './model/film-model.js';
 import { Method } from './util/const.js';
 
-export default class API {
+class API {
   constructor(endPoint, authorization) {
     this._endPoint = endPoint;
     this._authorization = authorization;
@@ -80,3 +80,4 @@ export default class API {
       .catch(API.catchError);
   }
 }
+export default API;

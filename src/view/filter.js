@@ -35,7 +35,7 @@ const createMenuTemplate = (menuItems, currentFilterType) => {
   </nav>`;
 };
 
-export default class Filter extends Abstract {
+class Filter extends Abstract {
   constructor(filters, currentFilterType) {
     super();
 
@@ -78,3 +78,4 @@ export default class Filter extends Abstract {
       .addEventListener('click', this._statsScreenClickHandler);
   }
 }
+export default Filter;

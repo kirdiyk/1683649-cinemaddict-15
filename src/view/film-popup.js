@@ -150,7 +150,7 @@ const createFilmDetailsTemplate = (film, commentsItems) => {
     </section>`;
 };
 
-export default class FilmPopup extends SmartView {
+class FilmPopup extends SmartView {
   constructor(film, comments) {
     super();
 
@@ -164,9 +164,9 @@ export default class FilmPopup extends SmartView {
     this._commentInputHandler = this._commentInputHandler.bind(this);
     this._emojiChangeHandler = this._emojiChangeHandler.bind(this);
 
-    this._viewedClickHadler = this._viewedClickHadler.bind(this);
-    this._favoriteClickHadler = this._favoriteClickHadler.bind(this);
-    this._watchlistClickHadler = this._watchlistClickHadler.bind(this);
+    this._viewedClickHandler = this._viewedClickHandler.bind(this);
+    this._favoriteClickHandler = this._favoriteClickHandler.bind(this);
+    this._watchlistClickHandler = this._watchlistClickHandler.bind(this);
 
     this._setInnerHandlers();
   }
@@ -196,17 +196,17 @@ export default class FilmPopup extends SmartView {
     this._callback.click();
   }
 
-  _viewedClickHadler(evt) {
+  _viewedClickHandler(evt) {
     evt.preventDefault();
     this._callback.viewedClick(this._data);
   }
 
-  _favoriteClickHadler(evt) {
+  _favoriteClickHandler(evt) {
     evt.preventDefault();
     this._callback.favoriteClick(this._data);
   }
 
-  _watchlistClickHadler(evt) {
+  _watchlistClickHandler(evt) {
     evt.preventDefault();
     this._callback.watchlistClick(this._data);
   }
@@ -292,25 +292,25 @@ export default class FilmPopup extends SmartView {
     document.addEventListener('keydown', this._commentSubmitHandler);
   }
 
-  setViewedClickHadler(callback) {
+  setViewedClickHandler(callback) {
     this._callback.viewedClick = callback;
     this.getElement()
       .querySelector('.film-details__control-button--watched')
-      .addEventListener('click', this._viewedClickHadler);
+      .addEventListener('click', this._viewedClickHandler);
   }
 
-  setFavoriteClickHadler(callback) {
+  setFavoriteClickHandler(callback) {
     this._callback.favoriteClick = callback;
     this.getElement()
       .querySelector('.film-details__control-button--favorite')
-      .addEventListener('click', this._favoriteClickHadler);
+      .addEventListener('click', this._favoriteClickHandler);
   }
 
-  setWatchlistClickHadler(callback) {
+  setWatchlistClickHandler(callback) {
     this._callback.watchlistClick = callback;
     this.getElement()
       .querySelector('.film-details__control-button--watchlist')
-      .addEventListener('click', this._watchlistClickHadler);
+      .addEventListener('click', this._watchlistClickHandler);
   }
 
   _setInnerHandlers() {
@@ -329,10 +329,11 @@ export default class FilmPopup extends SmartView {
 
   _setPresenterHandlers() {
     this.setClosePopupClickHandler(this._callback.click);
-    this.setViewedClickHadler(this._callback.viewedClick);
-    this.setWatchlistClickHadler(this._callback.watchlistClick);
-    this.setFavoriteClickHadler(this._callback.favoriteClick);
+    this.setViewedClickHandler(this._callback.viewedClick);
+    this.setWatchlistClickHandler(this._callback.watchlistClick);
+    this.setFavoriteClickHandler(this._callback.favoriteClick);
     this.setCommentDeleteClickHandler(this._callback.deleteComment);
     this.setCommentSubmitHandler(this._callback.commentSubmit);
   }
 }
+export default  FilmPopup;

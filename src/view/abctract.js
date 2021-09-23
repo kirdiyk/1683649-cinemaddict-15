@@ -1,7 +1,7 @@
 import { createElement } from '../util/render.js';
 import { SHAKE_TIMEOUT } from '../util/const.js';
 
-export default class Abstract {
+class Abstract {
   constructor() {
     this._element = null;
     this._callback = {};
@@ -26,3 +26,5 @@ export default class Abstract {
     }, SHAKE_TIMEOUT);
   }
 }
+
+export default Abstract;

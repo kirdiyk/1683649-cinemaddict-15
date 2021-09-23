@@ -1,11 +1,11 @@
 import { removeComponent, render, replace } from '../util/render';
 import { RenderPosition, CardMode, UserAction, UpdateType, FilterType } from '../util/const.js';
 import FilmCard from '../view/film-card.js';
-import FilmDetail from '../view/film-detail.js';
+import FilmDetail from '../view/film-popup.js';
 import CommentModel from '../model/comment-model.js';
 import { isOnline } from '../util/utils.js';
 
-export default class FilmCardPresenter {
+class FilmCardPresenter {
   constructor(filmContainer, changeData, changeMode, filterType, api) {
     this._filmContainer = filmContainer;
     this._changeData = changeData;
@@ -17,9 +17,9 @@ export default class FilmCardPresenter {
     this._filmCardComponent = null;
     this._commentsModel = new CommentModel();
 
-    this._switchViewedClickHadler = this._switchViewedClickHadler.bind(this);
-    this._switchFavoriteClickHadler = this._switchFavoriteClickHadler.bind(this);
-    this._switchWatchlistClickHadler = this._switchWatchlistClickHadler.bind(this);
+    this._switchViewedClickHandler = this._switchViewedClickHandler.bind(this);
+    this._switchFavoriteClickHandler = this._switchFavoriteClickHandler.bind(this);
+    this._switchWatchlistClickHandler = this._switchWatchlistClickHandler.bind(this);
     this._closePopupEscKeyHandler = this._closePopupEscKeyHandler.bind(this);
     this._hidePopup = this._hidePopup.bind(this);
 
@@ -48,9 +48,9 @@ export default class FilmCardPresenter {
       film,
       this._commentsModel.getComments(),
     ));
-    this._filmCardComponent.setViewedClickHadler(this._switchViewedClickHadler);
-    this._filmCardComponent.setFavoriteClickHadler(this._switchFavoriteClickHadler);
-    this._filmCardComponent.setWatchlistClickHadler(this._switchWatchlistClickHadler);
+    this._filmCardComponent.setViewedClickHandler(this._switchViewedClickHandler);
+    this._filmCardComponent.setFavoriteClickHandler(this._switchFavoriteClickHandler);
+    this._filmCardComponent.setWatchlistClickHandler(this._switchWatchlistClickHandler);
 
     if (prevFilmCardComponent === null) {
       render(this._filmContainer, this._filmCardComponent, RenderPosition.BEFOREEND);
@@ -91,9 +91,9 @@ export default class FilmCardPresenter {
     this._filmPopupComponent.getElement().scrollTo(0, this._scrollPosition);
 
     this._filmPopupComponent.setClosePopupClickHandler(this._hidePopup);
-    this._filmPopupComponent.setViewedClickHadler(this._switchViewedClickHadler);
-    this._filmPopupComponent.setFavoriteClickHadler(this._switchFavoriteClickHadler);
-    this._filmPopupComponent.setWatchlistClickHadler(this._switchWatchlistClickHadler);
+    this._filmPopupComponent.setViewedClickHandler(this._switchViewedClickHandler);
+    this._filmPopupComponent.setFavoriteClickHandler(this._switchFavoriteClickHandler);
+    this._filmPopupComponent.setWatchlistClickHandler(this._switchWatchlistClickHandler);
     this._filmPopupComponent.setCommentDeleteClickHandler(this._commentDeleteClickHandler);
     this._filmPopupComponent.setCommentSubmitHandler(this._commentSubmitHandler);
   }
@@ -121,7 +121,7 @@ export default class FilmCardPresenter {
     }
   }
 
-  _switchViewedClickHadler() {
+  _switchViewedClickHandler() {
     if (this._filmPopupComponent) {
       this._scrollPosition = this._filmPopupComponent.getScrollPosition();
     }
@@ -143,7 +143,7 @@ export default class FilmCardPresenter {
     );
   }
 
-  _switchFavoriteClickHadler() {
+  _switchFavoriteClickHandler() {
     if (this._filmPopupComponent) {
       this._scrollPosition = this._filmPopupComponent.getScrollPosition();
     }
@@ -163,7 +163,7 @@ export default class FilmCardPresenter {
     );
   }
 
-  _switchWatchlistClickHadler() {
+  _switchWatchlistClickHandler() {
     if (this._filmPopupComponent) {
       this._scrollPosition = this._filmPopupComponent.getScrollPosition();
     }
@@ -281,3 +281,5 @@ export default class FilmCardPresenter {
   }
 
 }
+export default FilmCardPresenter;
+

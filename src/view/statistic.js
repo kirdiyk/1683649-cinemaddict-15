@@ -156,7 +156,7 @@ const createStatisticTemplate = (rating, currentFilter, films) => (
 </section>
 `);
 
-export default class StatsScreen extends Abstract {
+class Statistic extends Abstract {
   constructor(rating, currentFilter, films) {
     super();
 
@@ -220,3 +220,4 @@ export default class StatsScreen extends Abstract {
     this._statisticCart = renderGenresChart(statisticCtx, this._films);
   }
 }
+export default  Statistic;

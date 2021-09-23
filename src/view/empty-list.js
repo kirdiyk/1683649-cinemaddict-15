@@ -16,7 +16,7 @@ const createEmptyListTemplate = (filterType) => {
   );
 };
 
-export default class EmptyList extends Abstract {
+class EmptyList extends Abstract {
   constructor(data) {
     super();
 
@@ -28,3 +28,4 @@ export default class EmptyList extends Abstract {
   }
 }
 
+export default EmptyList;

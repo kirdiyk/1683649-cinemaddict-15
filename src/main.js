@@ -3,7 +3,7 @@ import FilterModel from './model/filter-model.js';
 import FilmsPresenter from './presenter/films-presenter.js';
 import FilterPresenter from './presenter/filter-presenter.js';
 import FooterStats from './view/footer-stats.js';
-import SiteManagment from './site-management.js';
+import SiteManagement from './site-management.js';
 import { END_POINT, AUTHORIZATION, UpdateType, RenderPosition, STORE_NAME, OFFLINE_MESSAGE} from './util/const.js';
 import API from './api.js';
 import { isOnline } from './util/utils.js';
@@ -13,7 +13,7 @@ import Offline from './view/offline.js';
 
 const api = new API(END_POINT, AUTHORIZATION);
 const store = new Store(STORE_NAME, window.localStorage);
-const managerAPI = new SiteManagment(api, store);
+const managerAPI = new SiteManagement(api, store);
 
 const message = new Offline(OFFLINE_MESSAGE);
 

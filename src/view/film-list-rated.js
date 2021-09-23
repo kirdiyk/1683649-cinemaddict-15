@@ -5,8 +5,9 @@ const filmListRatedTemplate = () =>
     <h2 class="films-list__title">Top rated</h2>
   </section>`;
 
-export default class FilmListRated extends Abstract {
+class FilmListRated extends Abstract {
   getTemplate() {
     return filmListRatedTemplate();
   }
 }
+export default FilmListRated;

@@ -1,6 +1,6 @@
 import AbstractObserver from '../util/abstract-observe.js';
 
-export default class CommentModel extends AbstractObserver {
+class CommentModel extends AbstractObserver {
   constructor() {
     super();
 
@@ -19,3 +19,5 @@ export default class CommentModel extends AbstractObserver {
     this._comments = [...this._comments, update];
   }
 }
+
+export default CommentModel;

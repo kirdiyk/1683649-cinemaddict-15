@@ -29,10 +29,12 @@ export const getTotalTimeFilms = (films, format) => {
   const totalDuration = films.reduce((acc, rec) => acc + rec.runtime, 0);
 
   switch (format) {
-    case TimeFormat.HOUR:
+    case TimeFormat.HOUR: {
       return dayjs.duration(totalDuration, 'm').format('H');
-    case TimeFormat.MINUTE:
+    }
+    case TimeFormat.MINUTE: {
       return dayjs.duration(totalDuration, 'm').format('m');
+    }
   }
 };
 
@@ -62,11 +64,11 @@ export const countGenres = (films) => {
 };
 
 export const getGenresCount = (films) => {
-  const count = [];
+  const counts = [];
 
-  countGenres(films).forEach((genre) => count.push(genre.count));
+  countGenres(films).forEach((genre) => counts.push(genre.count));
 
-  return count;
+  return counts;
 };
 
 export const getTopGenre = (films) => {
@@ -95,14 +97,18 @@ export const getUserRating = (watchedCount) => {
   const isMovieBuffRank = watchedCount > ALL_FILMS;
 
   switch (watchedCount) {
-    case isNoviceRank:
+    case isNoviceRank: {
       return ProfileRank.NOVICE;
-    case isFanRank:
+    }
+    case isFanRank: {
       return ProfileRank.FAN;
-    case isMovieBuffRank:
+    }
+    case isMovieBuffRank: {
       return ProfileRank.MOVIE_BUFF;
-    default:
+    }
+    default: {
       return '';
+    }
   }
 };
 

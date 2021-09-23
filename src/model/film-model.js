@@ -1,7 +1,7 @@
 import AbstractObserver from '../util/abstract-observe.js';
 import { FILM_CARD_EXTRA, TOP_RATED } from '../util/const.js';
 
-export default class FilmModel extends AbstractObserver {
+class FilmModel extends AbstractObserver {
   constructor() {
     super();
 
@@ -126,3 +126,5 @@ export default class FilmModel extends AbstractObserver {
     this._notify(updateType, update);
   }
 }
+
+export default FilmModel;

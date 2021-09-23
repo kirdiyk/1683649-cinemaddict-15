@@ -6,6 +6,8 @@ export const ALL_FILMS = 20;
 export const TOP_RATED = 8;
 export const BAR_SIZE = 50;
 export const TIME = 1;
+export const FILM_RATING_MIN = 4;
+export const FILM_RATING_MAX = 6;
 export const RenderPosition = {
   AFTERBEGIN: 'afterbegin',
   AFTEREND: 'afterend',

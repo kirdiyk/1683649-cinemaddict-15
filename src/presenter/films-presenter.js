@@ -2,7 +2,7 @@ import {  FILM_CARD, RenderPosition, UpdateType, FilterType, StatsTime, UserActi
 import { removeComponent, render } from '../util/render.js';
 import { sortByDate, sortByRating, SortType, filterStatsByWatchingDate, filter, getUserRating} from '../util/utils.js';
 import FilmSection from '../view/film-section.js';
-import StatsScreen from '../view/statistic.js';
+import Statistic from '../view/statistic.js';
 import SortFilmList from '../view/sort-film-list.js';
 import FilmCardPresenter from './film-card-presenter.js';
 import FilmList from '../view/film-list.js';
@@ -14,7 +14,7 @@ import EmptyList from '../view/empty-list.js';
 import ShowMoreButton from '../view/show-more-button.js';
 import FilmListContainer from '../view/film-list-container.js';
 
-export default class FilmsPresenter {
+class FilmsPresenter {
   constructor(mainContainer, footerContainer, filmsModel, filterModel, api) {
     this._mainContainer = mainContainer;
     this._footerContainer = footerContainer;
@@ -187,30 +187,32 @@ export default class FilmsPresenter {
   _getFilms() {
     this._filterType = this._filterModel.getFilter();
     const films = this._filmsModel.getFilms();
-    const filtredFilms = filter[this._filterType](films);
+    const filteredFilms= filter[this._filterType](films);
 
     this._currentProfileRating = getUserRating(filter[FilterType.HISTORY](films).length);
 
     if (this._filterType === FilterType.STATS) {
       this._currentScreen = TypeList.STATS;
-      return filtredFilms;
+      return filteredFilms;
     }
 
     this._currentScreen = TypeList.FILMS;
 
     switch (this._currentSortType) {
-      case SortType.DATE:
-        return filtredFilms.sort(sortByDate);
-      case SortType.RATING:
-        return filtredFilms.sort(sortByRating);
+      case SortType.DATE: {
+        return filteredFilms.sort(sortByDate);
+      }
+      case SortType.RATING: {
+        return filteredFilms.sort(sortByRating);
+      }
     }
 
-    return filtredFilms;
+    return filteredFilms;
   }
 
   _viewActionHandler(actionType, updateType, update) {
     switch (actionType) {
-      case UserAction.UPDATE_FILM:
+      case UserAction.UPDATE_FILM: {
         this._api.updateFilm(update)
           .then((response) => {
             this._filmsModel.updateFilm(updateType, response);
@@ -226,7 +228,8 @@ export default class FilmsPresenter {
             this._setShakeStatePresenter(this._commentedFilmCardPresenter, update);
           });
         break;
-      case UserAction.UPDATE_POPUP:
+      }
+      case UserAction.UPDATE_POPUP: {
         this._api.updateFilm(update)
           .then((response) => {
             this._filmsModel.updateFilm(updateType, response);
@@ -237,6 +240,7 @@ export default class FilmsPresenter {
             this._updatePresenterComments(this._commentedFilmCardPresenter, update);
           });
         break;
+      }
     }
   }
 
@@ -266,36 +270,42 @@ export default class FilmsPresenter {
 
   _modelEventHandler(updateType, data) {
     const films = this._filmsModel.getFilms();
-    const filtredFilms = filter[FilterType.HISTORY](films);
+    const filteredFilms= filter[FilterType.HISTORY](films);
 
     switch (updateType) {
-      case UpdateType.INIT:
+      case UpdateType.INIT: {
         this._isLoading = false;
         this._clearFilmList({ resetFilmCounter: true, resetSortType: true });
         this._renderFilmsSection();
         break;
-      case UpdateType.PATCH:
+      }
+      case UpdateType.PATCH: {
         this._initFilmCardPresenter(this._filmCardPresenter, data);
         this._initFilmCardPresenter(this._ratedFilmCardPresenter, data);
         this._initFilmCardPresenter(this._commentedFilmCardPresenter, data);
         break;
-      case UpdateType.MINOR:
+      }
+      case UpdateType.MINOR: {
         this._clearFilmList({ resetFilmCounter: true });
         this._renderFilmsSection();
         break;
-      case UpdateType.MAJOR:
+      }
+      case UpdateType.MAJOR: {
         this._clearFilmList({ resetFilmCounter: true, resetSortType: true });
 
         switch (this._currentScreen) {
-          case TypeList.FILMS:
+          case TypeList.FILMS: {
             this._renderFilmsSection();
             break;
-          case TypeList.STATS:
+          }
+          case TypeList.STATS: {
             this._currentStatsFilter = FilterType.ALL;
-            this._renderStatsScreen(filtredFilms);
+            this._renderStatsScreen(filteredFilms);
             break;
+          }
         }
         break;
+      }
     }
   }
 
@@ -316,7 +326,7 @@ export default class FilmsPresenter {
   }
 
   _renderStatsScreen(films) {
-    this._statsComponent = new StatsScreen(
+    this._statsComponent = new Statistic(
       this._currentProfileRating,
       this._currentStatsFilter,
       films,
@@ -328,27 +338,32 @@ export default class FilmsPresenter {
 
   _statsFilterChangeHandler(value) {
     const films = this._filmsModel.getFilms();
-    const filtredFilms = filter[FilterType.HISTORY](films);
+    const filteredFilms= filter[FilterType.HISTORY](films);
     this._currentStatsFilter = value;
 
     removeComponent(this._statsComponent);
 
     switch (this._currentStatsFilter) {
-      case StatsTime.ALL:
-        this._renderStatsScreen(filtredFilms);
+      case StatsTime.ALL: {
+        this._renderStatsScreen(filteredFilms);
         break;
-      case StatsTime.TODAY:
-        this._renderStatsScreen(filterStatsByWatchingDate(filtredFilms, 'd'));
+      }
+      case StatsTime.TODAY: {
+        this._renderStatsScreen(filterStatsByWatchingDate(filteredFilms, 'd'));
         break;
-      case StatsTime.WEEK:
-        this._renderStatsScreen(filterStatsByWatchingDate(filtredFilms, 'w'));
+      }
+      case StatsTime.WEEK: {
+        this._renderStatsScreen(filterStatsByWatchingDate(filteredFilms, 'w'));
         break;
-      case StatsTime.MONTH:
-        this._renderStatsScreen(filterStatsByWatchingDate(filtredFilms, 'M'));
+      }
+      case StatsTime.MONTH: {
+        this._renderStatsScreen(filterStatsByWatchingDate(filteredFilms, 'M'));
         break;
-      case StatsTime.YEAR:
-        this._renderStatsScreen(filterStatsByWatchingDate(filtredFilms, 'y'));
+      }
+      case StatsTime.YEAR: {
+        this._renderStatsScreen(filterStatsByWatchingDate(filteredFilms, 'y'));
         break;
+      }
     }
   }
 
@@ -449,3 +464,4 @@ export default class FilmsPresenter {
     }
   }
 }
+export default FilmsPresenter;

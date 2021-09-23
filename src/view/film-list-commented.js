@@ -5,8 +5,10 @@ const filmListCommentedTemplate = () =>
     <h2 class="films-list__title">Most commented</h2>
   </section>`;
 
-export default class FilmListCommented extends Abstract {
+class FilmListCommented extends Abstract {
   getTemplate() {
     return filmListCommentedTemplate();
   }
 }
+
+export default FilmListCommented;

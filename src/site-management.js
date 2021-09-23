@@ -10,7 +10,7 @@ const createStoreStructure = (items) =>
     .reduce((acc, rec) => ({ ...acc, [rec.id]: rec }), {});
 
 
-export default class SiteManagment {
+class SiteManagement {
   constructor(api, store) {
     this._api = api;
     this._store = store;
@@ -99,3 +99,4 @@ export default class SiteManagment {
     return Promise.reject(new Error('Sync data failed'));
   }
 }
+export default SiteManagement;

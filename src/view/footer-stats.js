@@ -6,7 +6,7 @@ const createFooterStatsTemplate = (films = []) => (
   </section>`
 );
 
-export default class FooterStats extends Abstract {
+class FooterStats extends Abstract {
   constructor(films) {
     super();
     this._films = films;
@@ -16,3 +16,5 @@ export default class FooterStats extends Abstract {
     return createFooterStatsTemplate(this._films);
   }
 }
+
+export default FooterStats;

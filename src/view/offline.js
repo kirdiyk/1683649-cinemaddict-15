@@ -14,7 +14,7 @@ const createMessageTemplate = (text) => (
   </div>`
 );
 
-export default class Offline extends Abstract {
+class Offline extends Abstract {
   constructor(textMessage) {
     super();
 
@@ -33,3 +33,4 @@ export default class Offline extends Abstract {
     }
   }
 }
+export default Offline;

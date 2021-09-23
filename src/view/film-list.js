@@ -5,8 +5,10 @@ export const createFilmListTemplate = () =>
     <h2 class="films-list__title visually-hidden">All movies. Upcoming</h2>
   </section>`;
 
-export default class FilmList extends Abstract {
+class FilmList extends Abstract {
   getTemplate() {
     return createFilmListTemplate();
   }
 }
+
+export default FilmList;
