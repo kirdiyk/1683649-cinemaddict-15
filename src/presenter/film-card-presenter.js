@@ -1,7 +1,7 @@
 import { removeComponent, render, replace } from '../util/render';
 import { RenderPosition, CardMode, UserAction, UpdateType, FilterType } from '../util/const.js';
 import FilmCard from '../view/film-card.js';
-import FilmDetail from '../view/film-popup.js';
+import FilmPopup from '../view/film-popup.js';
 import CommentModel from '../model/comment-model.js';
 import { isOnline } from '../util/utils.js';
 
@@ -84,7 +84,7 @@ class FilmCardPresenter {
       this._filmPopupComponent = null;
     }
 
-    this._filmPopupComponent = new FilmDetail(film, this._commentsModel.getComments());
+    this._filmPopupComponent = new FilmPopup(film, this._commentsModel.getComments());
 
     this._showPopup();
     this.body.classList.add('hide-overflow');
