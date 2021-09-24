@@ -220,4 +220,4 @@ class Statistic extends Abstract {
     this._statisticCart = renderGenresChart(statisticCtx, this._films);
   }
 }
-export default  Statistic;
+export default Statistic;

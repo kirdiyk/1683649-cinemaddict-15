@@ -336,4 +336,4 @@ class FilmPopup extends SmartView {
     this.setCommentSubmitHandler(this._callback.commentSubmit);
   }
 }
-export default  FilmPopup;
+export default FilmPopup;

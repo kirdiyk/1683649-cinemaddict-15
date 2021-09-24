@@ -187,7 +187,7 @@ class FilmsPresenter {
   _getFilms() {
     this._filterType = this._filterModel.getFilter();
     const films = this._filmsModel.getFilms();
-    const filteredFilms= filter[this._filterType](films);
+    const filteredFilms = filter[this._filterType](films);
 
     this._currentProfileRating = getUserRating(filter[FilterType.HISTORY](films).length);
 
