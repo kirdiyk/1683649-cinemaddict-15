@@ -7,25 +7,25 @@ import { TimeFormat, FilterType, TIME, ProfileRank } from './const.js';
 
 dayjs.extend(relativeTime);
 
-export const getRelativeTimeFromDate = (date) => dayjs(date).fromNow();
+const getRelativeTimeFromDate = (date) => dayjs(date).fromNow();
 
-export const getFormatDate = (date, format) => dayjs(date).format(format);
+const getFormatDate = (date, format) => dayjs(date).format(format);
 
-export const sliceDescription = (text) => text.length >= MAX_DESCRIPTION ? `${text.slice(0, MAX_DESCRIPTION)}...` : text;
+const sliceDescription = (text) => text.length >= MAX_DESCRIPTION ? `${text.slice(0, MAX_DESCRIPTION)}...` : text;
 
-export const getDurationTime = (time, type) => {
+const getDurationTime = (time, type) => {
   const { hours, minutes } = dayjs.duration(time, type).$d;
 
   return `${hours}h ${minutes}m`;
 };
 
-export const SortType = {
+const SortType = {
   DEFAULT: 'default',
   DATE: 'date',
   RATING: 'rating',
 };
 
-export const getTotalTimeFilms = (films, format) => {
+const getTotalTimeFilms = (films, format) => {
   const totalDuration = films.reduce((acc, rec) => acc + rec.runtime, 0);
 
   switch (format) {
@@ -38,7 +38,7 @@ export const getTotalTimeFilms = (films, format) => {
   }
 };
 
-export const getGenres = (films) => {
+const getGenres = (films) => {
   const genres = new Set();
 
   films.forEach((film) => film.genres.forEach((genre) => genres.add(genre)));
@@ -46,7 +46,7 @@ export const getGenres = (films) => {
   return genres;
 };
 
-export const countGenres = (films) => {
+const countGenres = (films) => {
   const allMoviesGenres = [];
 
   films.forEach((film) => allMoviesGenres.push(...film.genres));
@@ -63,7 +63,7 @@ export const countGenres = (films) => {
   return genres;
 };
 
-export const getGenresCount = (films) => {
+const getGenresCount = (films) => {
   const counts = [];
 
   countGenres(films).forEach((genre) => counts.push(genre.count));
@@ -71,7 +71,7 @@ export const getGenresCount = (films) => {
   return counts;
 };
 
-export const getTopGenre = (films) => {
+const getTopGenre = (films) => {
   const topGenre = countGenres(films);
 
   topGenre.sort((prev, next) => next.count - prev.count);
@@ -79,7 +79,7 @@ export const getTopGenre = (films) => {
   return topGenre[0].genre;
 };
 
-export const filter = {
+const filter = {
   [FilterType.ALL]: (films) => films.filter((film) => film),
   [FilterType.WATCHLIST]: (films) => films.filter((film) => film.isWatchlist),
   [FilterType.HISTORY]: (films) => films.filter((film) => film.isViewed),
@@ -87,11 +87,11 @@ export const filter = {
   [FilterType.STATS]: (films) => films,
 };
 
-export const sortByDate = (firstFilm, secondFilm) => dayjs(secondFilm.releaseDate).diff(dayjs(firstFilm.releaseDate));
+const sortByDate = (firstFilm, secondFilm) => dayjs(secondFilm.releaseDate).diff(dayjs(firstFilm.releaseDate));
 
-export const sortByRating = (firstFilm, secondFilm) => (secondFilm.filmRating > firstFilm.filmRating ? 1 : -1);
+const sortByRating = (firstFilm, secondFilm) => (secondFilm.filmRating > firstFilm.filmRating ? 1 : -1);
 
-export const getUserRating = (watchedCount) => {
+const getUserRating = (watchedCount) => {
   const isNoviceRank = watchedCount > 0 && watchedCount <= ALL_FILMS;
   const isFanRank = watchedCount > ALL_FILMS && watchedCount <= ALL_FILMS;
   const isMovieBuffRank = watchedCount > ALL_FILMS;
@@ -112,9 +112,11 @@ export const getUserRating = (watchedCount) => {
   }
 };
 
-export const isOnline = () => window.navigator.onLine;
+const isOnline = () => window.navigator.onLine;
 
-export const filterStatsByWatchingDate = (films, period) => {
+const filterStatsByWatchingDate = (films, period) => {
   const deadline = dayjs().subtract(TIME, period);
   return films.filter((movie) => dayjs(movie.watchingDate).diff(deadline, 'minute') > 0);
 };
+export{getDurationTime, getFormatDate, sliceDescription, getRelativeTimeFromDate, sortByDate, sortByRating, getGenres, getTotalTimeFilms,
+  filter, getGenresCount, SortType, isOnline, filterStatsByWatchingDate, getTopGenre, getUserRating};

@@ -1,14 +1,14 @@
 import { RenderPosition } from './const.js';
 import Abstract from '../view/abctract.js';
 
-export const createElement = (template) => {
+const createElement = (template) => {
   const newElement = document.createElement('div');
   newElement.innerHTML = template;
 
   return newElement.firstChild;
 };
 
-export const render = (container, child, place) => {
+const render = (container, child, place) => {
   if (container instanceof Abstract) {
     container = container.getElement();
   }
@@ -33,7 +33,7 @@ export const render = (container, child, place) => {
   }
 };
 
-export const removeComponent = (component) => {
+const removeComponent = (component) => {
   if (component === null) {
     return;
   }
@@ -45,7 +45,7 @@ export const removeComponent = (component) => {
   component.removeElement();
 };
 
-export const replace = (newChild, oldChild) => {
+const replace = (newChild, oldChild) => {
   if (oldChild instanceof Abstract) {
     oldChild = oldChild.getElement();
   }
@@ -62,3 +62,4 @@ export const replace = (newChild, oldChild) => {
 
   parent.replaceChild(newChild, oldChild);
 };
+export {createElement, render, removeComponent, replace};
